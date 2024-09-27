@@ -7,26 +7,25 @@ import { Router } from '@angular/router';
 import { AddPetDialogComponent } from '../add-pet-dialog/add-pet-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PetListComponent } from '../pet-list/pet-list.component';
-import { DeviceListComponent } from '../device-list/device-list.component';
 import { MatIconModule } from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    CommonModule,
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    PetListComponent,
-    DeviceListComponent,
     MatMenuModule
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  gifPath: string = '/assets/catcam.gif';
   pets: Pet[] = [];
   devices: any[] = [];
 
@@ -46,14 +45,14 @@ export class DashboardComponent implements OnInit {
   loadPets(): void {
     this.petService.getPets().subscribe(
       pets => this.pets = pets,
-      error => console.error('Error loading pets', error)
+      error => console.error('Error al cargar mascotas', error)
     );
   }
 
   loadDevices(): void {
     this.deviceService.getDevices().subscribe(
       devices => this.devices = devices,
-      error => console.error('Error loading devices', error)
+      error => console.error('Error al cargar dispositivos', error)
     );
   }
 
@@ -67,7 +66,7 @@ export class DashboardComponent implements OnInit {
             this.loadPets();
           },
           (error) => {
-            console.error('Error adding pet', error);
+            console.error('Error al agregar mascota', error);
           }
         );
       }
@@ -77,5 +76,10 @@ export class DashboardComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  addDevice(): void {
+    // Implementar lógica para agregar dispositivo
+    console.log('Agregar dispositivo');
   }
 }
