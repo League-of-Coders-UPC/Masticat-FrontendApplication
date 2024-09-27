@@ -10,7 +10,7 @@ export interface Pet {
   breed: string;
   age: number;
   weight: number;
-  userId: number;
+  imageUrl?: string; // Agregamos esta propiedad como opcional
 }
 
 @Injectable({
