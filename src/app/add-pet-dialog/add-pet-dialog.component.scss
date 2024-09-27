@@ -1,0 +1,19 @@
+mat-dialog-content {
+    form {
+      display: flex;
+      flex-direction: column;
+  
+      mat-form-field {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  
+  mat-dialog-actions {
+    justify-content: flex-end;
+  
+    button {
+      margin-left: 0.5rem;
+    }
+  }

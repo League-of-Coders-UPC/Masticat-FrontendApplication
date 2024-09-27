@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Edit Pet</h2>
+<mat-dialog-content>
+  <form [formGroup]="petForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Species</mat-label>
+      <mat-select formControlName="species" required>
+        <mat-option value="Cat">Cat</mat-option>
+        <mat-option value="Dog">Dog</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Breed</mat-label>
+      <input matInput formControlName="breed" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Age</mat-label>
+      <input matInput type="number" formControlName="age" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Weight (kg)</mat-label>
+      <input matInput type="number" formControlName="weight" required>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!petForm.valid">Update</button>
+</mat-dialog-actions>
