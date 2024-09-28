@@ -19,10 +19,10 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   gifPath: string = '/assets/catcam.gif';
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadPets();
@@ -44,15 +44,18 @@ export class DashboardComponent implements OnInit {
 
   loadPets(): void {
     this.petService.getPets().subscribe(
-      pets => this.pets = pets,
-      error => console.error('Error al cargar mascotas', error)
+      (pets) => {
+        this.pets = pets;
+        console.log('Mascotas cargadas:', this.pets);
+      },
+      (error) => console.error('Error al cargar mascotas', error)
     );
   }
 
   loadDevices(): void {
     this.deviceService.getDevices().subscribe(
-      devices => this.devices = devices,
-      error => console.error('Error al cargar dispositivos', error)
+      (devices) => (this.devices = devices),
+      (error) => console.error('Error al cargar dispositivos', error)
     );
   }
 
