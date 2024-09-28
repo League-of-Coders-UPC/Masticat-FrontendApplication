@@ -1,0 +1,18 @@
+<mat-list>
+    <mat-list-item *ngFor="let pet of pets">
+      <img matListAvatar [src]="pet.imageUrl || '/assets/default-pet.png'" [alt]="pet.name">
+      <h3 matLine>{{ pet.name }}</h3>
+      <p matLine>
+        <span>{{ pet.species }} - {{ pet.breed }}</span>
+      </p>
+      <p matLine>
+        <span>Age: {{ pet.age }} years, Weight: {{ pet.weight }} kg</span>
+      </p>
+      <button mat-icon-button (click)="editPet(pet)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deletePet(pet.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
