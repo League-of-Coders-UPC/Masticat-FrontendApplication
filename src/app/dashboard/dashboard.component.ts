@@ -62,6 +62,8 @@ export class DashboardComponent implements OnInit {
   openAddPetDialog(): void {
     const dialogRef = this.dialog.open(AddPetDialogComponent);
 
+    console.log(this.pets);
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.petService.addPet(result).subscribe(
