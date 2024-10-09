@@ -1,0 +1,71 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span (click)="goToDashboard()" class="toolbar-title">Masticat</span>
+</mat-toolbar>
+
+
+<div class="profile-container">
+  <div class="profile-header">
+    <!-- Imagen de perfil con una imagen por defecto -->
+    <img src="/assets/default-profile.png" alt="User photo" class="profile-photo">
+    <div class="profile-info">
+      <!-- Texto por defecto para el nombre y el email -->
+      <h1>Your Name</h1>
+      <p>your.emailexample.com</p>
+    </div>
+    <button mat-raised-button color="primary" class="edit-btn">Edit</button>
+  </div>
+
+  <div class="profile-form">
+    <div class="form-group">
+      <div class="form-field">
+        <label>Full Name</label>
+        <input matInput placeholder="Enter your full name">
+      </div>
+      <div class="form-field">
+        <label>Nick Name</label>
+        <input matInput placeholder="Enter your nick name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-field">
+        <label>Gender</label>
+        <mat-select placeholder="Select your gender">
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </div>
+      <div class="form-field">
+        <label>Country</label>
+        <input matInput placeholder="Enter your country">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-field">
+        <label>Language</label>
+        <mat-select placeholder="Select your language">
+          <mat-option value="english">English</mat-option>
+          <mat-option value="spanish">Spanish</mat-option>
+          <mat-option value="french">French</mat-option>
+        </mat-select>
+      </div>
+      <div class="form-field">
+        <label>Time Zone</label>
+        <input matInput placeholder="Enter your time zone">
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-email">
+    <h2>My Email Address</h2>
+    <div class="email-details">
+      <mat-icon>email</mat-icon>
+      <div>
+        <p>your.emailexample.com</p>
+        <span>1 month ago</span>
+      </div>
+    </div>
+  </div>
+</div>
