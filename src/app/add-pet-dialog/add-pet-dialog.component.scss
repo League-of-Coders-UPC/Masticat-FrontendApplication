@@ -8,10 +8,10 @@ mat-dialog-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;  // Alinea verticalmente el contenido
+  justify-content: center;
   padding: 1.5rem;
-  max-height: 100vh;  // Limita el tamaño para evitar que supere la altura de la ventana
-  overflow: hidden;  // Evitar scroll innecesario
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 .form-container {
