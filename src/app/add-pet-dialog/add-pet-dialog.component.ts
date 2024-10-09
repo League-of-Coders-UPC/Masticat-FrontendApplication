@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatLabel} from "@angular/material/form-field";
 
 @Component({
   selector: 'app-add-pet-dialog',
@@ -13,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatLabel,
     MatSelectModule
   ],
   templateUrl: './add-pet-dialog.component.html',
@@ -25,6 +27,8 @@ export class AddPetDialogComponent {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddPetDialogComponent>
   ) {
+    this.dialogRef.updateSize('500px', 'auto');  // Ajusta el tamaño del diálogo
+
     this.petForm = this.fb.group({
       name: ['', Validators.required],
       species: ['', Validators.required],
@@ -44,3 +48,4 @@ export class AddPetDialogComponent {
     this.dialogRef.close();
   }
 }
+
