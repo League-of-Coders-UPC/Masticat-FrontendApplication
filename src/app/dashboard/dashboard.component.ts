@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Pet, PetService } from '../pet.service';
 import { DeviceService } from '../device.service';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { AddPetDialogComponent } from '../add-pet-dialog/add-pet-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,7 +19,8 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    RouterLink
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']

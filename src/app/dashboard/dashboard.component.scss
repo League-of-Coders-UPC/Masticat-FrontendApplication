@@ -6,6 +6,17 @@ $primary-color-light: #fff8e1;
 $primary-color-dark: #ffa000;
 $text-color-on-primary: rgba(0, 0, 0, 0.87);
 
+span{
+  font-family: 'Satisfy', cursive;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 57.62px;
+  letter-spacing: -0.29px;
+  text-align: center;
+  cursor: pointer;
+  color: #1E0E62;
+}
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
