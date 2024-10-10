@@ -1,0 +1,11 @@
+<div class="device-manager">
+  <h2>Lista de Dispositivos</h2>
+  <button (click)="addDevice()" class="add-device-btn">Agregar Dispositivo</button>
+
+  <div class="device-list">
+    <div *ngFor="let device of devices" class="device-item">
+      <h3>{{ device.name }}</h3>
+      <p>ID: {{ device.id }}</p>
+    </div>
+  </div>
+</div>

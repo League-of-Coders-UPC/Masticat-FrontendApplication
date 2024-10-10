@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Pet, PetService } from '../pet.service';
-import { DeviceService } from '../device.service';
 import { AuthService } from '../auth.service';
 import {Router, RouterLink} from '@angular/router';
 import { AddPetDialogComponent } from '../add-pet-dialog/add-pet-dialog.component';
@@ -28,11 +27,15 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent implements OnInit {
   gifPath: string = '/assets/catcam.gif';
   pets: Pet[] = [];
-  devices: any[] = [];
+
+  // Aquí se inicializa el array de dispositivos
+  devices: any[] = [
+    { name: 'Device 1', id: 'h1h1h1h1h1' },
+    { name: 'Device 2', id: 'h2h2h2h2h2' }
+  ];
 
   constructor(
     private petService: PetService,
-    private deviceService: DeviceService,
     private dialog: MatDialog,
     private authService: AuthService,
     private router: Router
@@ -40,20 +43,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPets();
-    this.loadDevices();
+    // Como ya tenemos los dispositivos definidos en el componente, no necesitamos cargar nada aquí
   }
 
   loadPets(): void {
     this.petService.getPets().subscribe(
       pets => this.pets = pets,
       error => console.error('Error al cargar mascotas', error)
-    );
-  }
-
-  loadDevices(): void {
-    this.deviceService.getDevices().subscribe(
-      devices => this.devices = devices,
-      error => console.error('Error al cargar dispositivos', error)
     );
   }
 
@@ -80,7 +76,7 @@ export class DashboardComponent implements OnInit {
   }
 
   addDevice(): void {
-    // Implementar lógica para agregar dispositivo
+    // Aquí podrías agregar la lógica para agregar más dispositivos
     console.log('Agregar dispositivo');
   }
 }
