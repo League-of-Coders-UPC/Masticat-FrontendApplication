@@ -5,6 +5,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-device-list',
@@ -13,7 +14,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatGridListModule,
     MatIconModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    NgForOf
   ],
   templateUrl: './device-list.component.html',
   styleUrl: './device-list.component.scss'

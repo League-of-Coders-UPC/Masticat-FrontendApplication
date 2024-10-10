@@ -2,6 +2,9 @@
   text-align: center;
   font-size: 2rem;
   margin-bottom: 1.5rem;
+  @media (max-width: 768px) {
+    font-size: 1.5rem; // Reduzco el tamaño en pantallas pequeñas
+  }
 }
 
 mat-dialog-content {
@@ -12,6 +15,11 @@ mat-dialog-content {
   padding: 1.5rem;
   max-height: 100vh;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 1rem; // Ajustar padding en pantallas más pequeñas
+    max-height: 90vh; // Limita la altura en pantallas pequeñas
+  }
 }
 
 .form-container {
@@ -19,6 +27,11 @@ mat-dialog-content {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 600px; // Limitar el ancho máximo del formulario
+
+  @media (max-width: 768px) {
+    max-width: 100%; // Usar todo el ancho disponible en pantallas pequeñas
+  }
 
   label {
     font-size: 1rem;
@@ -36,6 +49,11 @@ mat-dialog-content {
       border-radius: 20px;
       padding: 0.75rem;
       font-size: 1rem;
+
+      @media (max-width: 768px) {
+        padding: 0.5rem; // Ajusta el padding en pantallas más pequeñas
+        font-size: 0.9rem; // Reduzco el tamaño de texto
+      }
     }
 
     .mat-form-field-infix {
@@ -49,12 +67,18 @@ mat-dialog-content {
   display: flex;
   justify-content: space-between;
   padding-top: 2rem;
+  width: 100%;
 
   button {
     width: 45%;
     padding: 0.75rem;
     border-radius: 20px;
     font-size: 1rem;
+
+    @media (max-width: 768px) {
+      width: 100%; // Botones ocupan todo el ancho en pantallas pequeñas
+      margin-bottom: 1rem; // Añade separación entre botones
+    }
   }
 
   .button-photo {

@@ -27,7 +27,7 @@ export class AddPetDialogComponent {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddPetDialogComponent>
   ) {
-    this.dialogRef.updateSize('500px', 'auto');  // Ajusta el tamaño del diálogo
+    this.dialogRef.updateSize('500px', 'auto');
 
     this.petForm = this.fb.group({
       name: ['', Validators.required],
