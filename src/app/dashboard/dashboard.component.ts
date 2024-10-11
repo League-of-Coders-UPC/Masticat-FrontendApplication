@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Pet, PetService } from '../pet.service';
 import { AuthService } from '../auth.service';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AddPetDialogComponent } from '../add-pet-dialog/add-pet-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,7 +25,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DashboardComponent implements OnInit {
   gifPath: string = '/assets/catcam.gif';
-  pets: Pet[] = [];
+  pets: any[] = [];
 
   // Aquí se inicializa el array de dispositivos
   devices: any[] = [
@@ -35,22 +34,19 @@ export class DashboardComponent implements OnInit {
   ];
 
   constructor(
-    private petService: PetService,
     private dialog: MatDialog,
     private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.loadPets();
-    // Como ya tenemos los dispositivos definidos en el componente, no necesitamos cargar nada aquí
-  }
-
-  loadPets(): void {
-    this.petService.getPets().subscribe(
-      pets => this.pets = pets,
-      error => console.error('Error al cargar mascotas', error)
-    );
+    this.pets = [
+      {
+        name:'Luna',
+        age: 5,
+        weight: 4.5
+      }
+    ];
   }
 
   openAddPetDialog(): void {
@@ -58,14 +54,7 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.petService.addPet(result).subscribe(
-          () => {
-            this.loadPets();
-          },
-          (error) => {
-            console.error('Error al agregar mascota', error);
-          }
-        );
+        this.pets.push(result);
       }
     });
   }
@@ -76,7 +65,6 @@ export class DashboardComponent implements OnInit {
   }
 
   addDevice(): void {
-    // Aquí podrías agregar la lógica para agregar más dispositivos
     console.log('Agregar dispositivo');
   }
 }

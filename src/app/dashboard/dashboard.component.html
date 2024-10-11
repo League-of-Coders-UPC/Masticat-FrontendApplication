@@ -13,7 +13,7 @@
   <!-- Contenido principal del dashboard -->
   <div class="main-content">
     <mat-toolbar color="primary" class="custom-toolbar">
-      <span></span> <!-- Esto elimina el texto "Dashboard" -->
+      <span></span>
       <span class="spacer"></span>
       <button mat-icon-button [routerLink]="['/profile']">
         <mat-icon>account_circle</mat-icon>
@@ -87,21 +87,22 @@
         </mat-card-content>
       </mat-card>
 
-      <div class="pets-container">
-        <mat-card class="pet-card" *ngFor="let pet of pets">
-          <img [src]="pet.imageUrl || '/assets/default-pet.png'" [alt]="pet.name">
-          <div class="pet-info">
-            <h3>{{ pet.name }}</h3>
-            <p>{{ pet.age }} años</p>
-            <p>{{ pet.weight }} KG</p>
-          </div>
-        </mat-card>
-
         <mat-card class="add-pet" (click)="openAddPetDialog()">
           <mat-icon>add</mat-icon>
           <h2>Agregar Mascota</h2>
         </mat-card>
+
+        <mat-card class="pet-card" *ngFor="let pet of pets">
+          <div class="image-container">
+            <div class="pet-species">
+            </div>
+            <div class="pet-info">
+              <h3>{{ pet.name }}</h3>
+              <p>{{ pet.age }} years old</p>
+              <p>{{ pet.weight }} KG</p>
+            </div>
+          </div>
+        </mat-card>
       </div>
     </div>
   </div>
-</div>
