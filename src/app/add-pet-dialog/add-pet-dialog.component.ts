@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatLabel} from "@angular/material/form-field";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatLabel } from "@angular/material/form-field";
 
 @Component({
   selector: 'app-add-pet-dialog',
@@ -18,7 +18,7 @@ import {MatLabel} from "@angular/material/form-field";
     MatSelectModule
   ],
   templateUrl: './add-pet-dialog.component.html',
-  styleUrl: './add-pet-dialog.component.scss'
+  styleUrls: ['./add-pet-dialog.component.scss']
 })
 export class AddPetDialogComponent {
   petForm: FormGroup;
@@ -48,4 +48,3 @@ export class AddPetDialogComponent {
     this.dialogRef.close();
   }
 }
-
