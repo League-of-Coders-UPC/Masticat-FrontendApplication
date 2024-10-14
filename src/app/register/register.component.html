@@ -1,0 +1,35 @@
+<div class="container-register">
+  <mat-card class="register-card">
+    <mat-card-title class="app-title">Masticat</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" class="register-form">
+        <label for="firstName">First Name</label>
+        <mat-form-field appearance="outline">
+          <input id="firstName" matInput type="text" [(ngModel)]="FirstName" name="FirstName" required>
+        </mat-form-field>
+
+        <label for="lastName">Last Name</label>
+        <mat-form-field appearance="outline">
+          <input id="lastName" matInput type="text" [(ngModel)]="LastName" name="LastName" required>
+        </mat-form-field>
+
+        <label for="email">Email</label>
+        <mat-form-field appearance="outline">
+          <input id="email" matInput type="email" [(ngModel)]="email" name="email" required>
+        </mat-form-field>
+
+        <label for="password">Password</label>
+        <mat-form-field appearance="outline">
+          <input id="password" matInput type="password" [(ngModel)]="password" name="password" required>
+        </mat-form-field>
+
+        <label for="confirmPassword">Repeat Password</label>
+        <mat-form-field appearance="outline">
+          <input id="confirmPassword" matInput type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+        </mat-form-field>
+
+        <button mat-flat-button class="login-button" type="submit">Sign Up</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

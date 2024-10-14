@@ -5,6 +5,10 @@ import { tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { StorageService } from './storage.service';
 
+interface RegisterResponse {
+  token: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,5 +35,13 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.storageService.getItem('token');
+  }
+
+  register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
+    return of({ success: true }).pipe(
+      tap(() => {
+        console.log('User registered:', { firstName, lastName, email,password});
+      })
+    );
   }
 }
