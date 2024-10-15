@@ -15,12 +15,17 @@
     <mat-toolbar color="primary" class="custom-toolbar">
       <span></span>
       <span class="spacer"></span>
-      <button mat-icon-button [routerLink]="['/profile']">
+      <button mat-menu-item (click)="openNotification()" class="icon-button">
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <button mat-icon-button [routerLink]="['/profile']" class="icon-button">
         <mat-icon>account_circle</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">Logout</button>
-      </mat-menu>
+
+      <button mat-menu-item [routerLink]="['/login']" class="icon-button">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
 
     <div class="content">

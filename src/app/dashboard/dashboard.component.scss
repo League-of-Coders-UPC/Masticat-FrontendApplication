@@ -16,22 +16,41 @@ span {
   cursor: pointer;
   color: #1e0e62;
 }
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px;
+  background-color: transparent;
+  cursor: pointer;
+  justify-content: space-between;
+
+  mat-icon {
+    font-size: 26px;
+    image-orientation: from-image;
+    color: #000;
+    border-radius: 50%;
+  }
+  &:hover {
+    border-color: #FFA500;
+  }
+}
 
 .dashboard-container {
   display: flex;
-  min-height: 100vh; // Asegura que la barra lateral cubra al menos la altura de la ventana
+  min-height: 100vh;
 
   .sidebar {
-    width: 180px; // Ancho de la barra lateral reducido
+    width: 180px;
     background-color: $primary-color;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; // Asegura que el contenido se extienda hasta abajo
+    justify-content: space-between;
 
     .device-list {
-      flex-grow: 1; // Hace que la lista de dispositivos ocupe todo el espacio disponible
-      overflow-y: auto; // Habilita el desplazamiento si hay muchos dispositivos
+      flex-grow: 1;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -39,7 +58,6 @@ span {
       .device-item {
         background-color: white;
         padding: 10px;
-        border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         font-size: 14px;
         color: black;
@@ -53,7 +71,7 @@ span {
 
   .main-content {
     flex-grow: 1;
-    background-color: white; // La barra vertical es blanca
+    background-color: white;
     padding: 20px;
 
     .custom-toolbar {
