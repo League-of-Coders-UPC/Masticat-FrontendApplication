@@ -1,0 +1,14 @@
+<div class="notification-container">
+  <mat-toolbar color="primary">
+    <span>Notificaciones</span>
+  </mat-toolbar>
+
+  <div class="notifications-list">
+    <mat-card *ngFor="let notification of notifications" class="notification-card">
+      <mat-card-content>
+        <p>{{ notification.message }}</p>
+        <small>{{ notification.timestamp | date: 'short' }}</small>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { AuthGuard } from './auth.guard';
 import {ProfileComponent} from "./profile/profile.component";
 import {DeviceListComponent} from "./device-list/device-list.component";
 import {RegisterComponent} from "./register/register.component";
+import {NotificationComponent} from "./notification/notification.component";
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -12,4 +13,5 @@ export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {path: 'signup',component:RegisterComponent},
+  {path: 'notifications' , component: NotificationComponent}
 ];

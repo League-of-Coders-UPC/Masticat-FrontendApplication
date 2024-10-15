@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
+import {NotificationComponent} from "../notification/notification.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +28,6 @@ export class DashboardComponent implements OnInit {
   gifPath: string = '/assets/catcam.gif';
   pets: any[] = [];
 
-  // Aquí se inicializa el array de dispositivos
   devices: any[] = [
     { name: 'Device 1', id: 'h1h1h1h1h1' },
     { name: 'Device 2', id: 'h2h2h2h2h2' }
@@ -42,11 +42,23 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.pets = [
       {
-        name:'Luna',
+        name: 'Luna',
         age: 5,
         weight: 4.5
       }
     ];
+  }
+
+  openNotification(): void {
+    const dialogRef = this.dialog.open(NotificationComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Notificación cerrada con resultado:', result);
+      }
+    });
   }
 
   openAddPetDialog(): void {
