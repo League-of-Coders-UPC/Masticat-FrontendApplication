@@ -1,0 +1,30 @@
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.period-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.period-buttons button {
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.period-buttons button.active {
+  background-color: #FCD34D;
+  color: black;
+}
+
+.total-amount {
+  color: #666;
+}
+
+.chart-container {
+  height: 300px;
+  width: 100%;
+}

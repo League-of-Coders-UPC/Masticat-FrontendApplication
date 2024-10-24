@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import {NotificationComponent} from "../notification/notification.component";
+import {FeedingHabitsChartComponent} from "./feeding-habits-chart/feeding-habits-chart.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ import {NotificationComponent} from "../notification/notification.component";
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    RouterLink
+    RouterLink,
+    FeedingHabitsChartComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
