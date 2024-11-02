@@ -1,3 +1,9 @@
 <div class="app-container">
-  <router-outlet></router-outlet>
+  <div *ngIf="isLoading" class="loading-container">
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <router-outlet></router-outlet>
+  </div>
 </div>
