@@ -1,0 +1,15 @@
+<div class="sidebar">
+  <span class="title">Masticat</span>
+  <div class="device-list">
+    <div
+      class="device-item"
+      *ngFor="let device of devices"
+      (click)="changeDevice.emit(device)"
+      [ngClass]="{ 'active': selectedDevice?.uuid === device.uuid }"
+    >
+      <p><strong>Device {{ device.uuid }}</strong></p>
+      <p>#{{ device.serialNumber }}</p>
+    </div>
+  </div>
+</div>
+

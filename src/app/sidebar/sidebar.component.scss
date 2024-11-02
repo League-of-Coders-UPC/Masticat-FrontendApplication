@@ -1,0 +1,57 @@
+@use '@angular/material' as mat;
+
+$primary-color: #FFCF59; // Color ámbar
+$primary-color-light: #fff8e1;
+$primary-color-dark: #ffa000;
+$text-color-on-primary: rgba(0, 0, 0, 0.87);
+
+span {
+  font-family: 'Satisfy', cursive;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 57.62px;
+  letter-spacing: -0.29px;
+  text-align: center;
+  cursor: pointer;
+  color: #1e0e62;
+}
+.sidebar {
+    width: 250px;
+    background-color: $primary-color;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .device-list {
+      flex-grow: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .device-item {
+        background-color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        color: black;
+        border: 2px solid transparent;
+        &:not(.active):hover {
+          cursor: pointer;
+        }
+        p {
+          margin: 0;
+        }
+      }
+      
+    }
+    .active {
+      border: 2px solid #d59a00 !important;
+    }
+    .title {
+      margin-bottom: 20px;
+    }
+}
