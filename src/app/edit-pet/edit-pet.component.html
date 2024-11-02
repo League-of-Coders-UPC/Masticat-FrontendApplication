@@ -1,0 +1,69 @@
+<div class="popup" >
+    <div class="add-pet-container">
+        
+        <mat-card class="add-pet-card card-global">
+            <div class="close-pop" (click)="invertShowPopupEditPet.emit();">
+                <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.3335 0.333335C9.48054 0.333335 8.62669 0.658231 7.97669 1.3099L1.31002 7.97656C0.00668609 9.2799 0.00668609 11.3901 1.31002 12.6901L25.6199 37L1.31002 61.3099C0.00668609 62.6132 0.00668609 64.7234 1.31002 66.0234L7.97669 72.6901C9.28002 73.9934 11.3902 73.9934 12.6902 72.6901L37.0001 48.3802L61.31 72.6901C62.61 73.9934 64.7236 73.9934 66.0236 72.6901L72.6902 66.0234C73.9936 64.7201 73.9936 62.6099 72.6902 61.3099L48.3803 37L72.6902 12.6901C73.9936 11.3901 73.9936 9.27656 72.6902 7.97656L66.0236 1.3099C64.7202 0.00656402 62.61 0.00656402 61.31 1.3099L37.0001 25.6198L12.6902 1.3099C12.0386 0.658231 11.1864 0.333335 10.3335 0.333335Z" fill="#FFCF59"/>
+                </svg>
+            </div>
+          <mat-card-content>
+            <form (ngSubmit)="onSubmit()" class="add-pet-form" autocomplete="off">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" [(ngModel)]="pet.name" name="name" required>
+              </mat-form-field>
+              <div *ngIf="isErrorForm.name" class="error-message">{{ isErrorForm.name }}</div>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Choose Breed</mat-label>
+                <mat-select [(ngModel)]="pet.breed" name="breed" required>
+                  <mat-option *ngFor="let breed of breedList" [value]="breed">
+                    {{ breed }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <div *ngIf="isErrorForm.breed" class="error-message">{{ isErrorForm.breed }}</div>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Choose Species</mat-label>
+                <mat-select [(ngModel)]="pet.species" name="species" required>
+                  <mat-option *ngFor="let species of speciesList" [value]="species">
+                    {{ species }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="isErrorForm.species" class="error-message">{{ isErrorForm.species }}</div>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Birthdate</mat-label>
+                <input matInput type="date" [(ngModel)]="pet.birthdate" name="birthdate" required>
+              </mat-form-field>
+              <div *ngIf="isErrorForm.birthdate" class="error-message">{{ isErrorForm.birthdate }}</div>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Weight</mat-label>
+                <input matInput type="number" [(ngModel)]="pet.weight" name="weight" required>
+              </mat-form-field>
+              <div *ngIf="isErrorForm.weight" class="error-message">{{ isErrorForm.weight }}</div>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Age</mat-label>
+                <input matInput type="number" [(ngModel)]="pet.age" name="age" required>
+              </mat-form-field>
+              <div *ngIf="isErrorForm.age" class="error-message">{{ isErrorForm.age }}</div>
+              
+              <mat-form-field appearance="outline">
+                <mat-label>Image URL</mat-label>
+                <input matInput type="text" [(ngModel)]="pet.imageUrl" name="imageUrl" required>
+              </mat-form-field>
+              <div *ngIf="isErrorForm.imageUrl" class="error-message">{{ isErrorForm.imageUrl }}</div>
+            <div>
+                <button mat-flat-button class="add-pet-button" type="submit">Update Pet</button>
+            </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+    </div>
+</div>

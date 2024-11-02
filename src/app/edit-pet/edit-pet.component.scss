@@ -1,0 +1,141 @@
+.add-pet-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  
+      mat-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem;
+  
+        mat-card-header {
+          justify-content: center;
+          margin-bottom: 1rem;
+        }
+  
+  
+        form {
+          display: flex;
+          flex-direction: column;
+  
+          mat-form-field {
+            width: 100%;
+            margin-bottom: 1rem;
+          }
+  
+          button {
+            margin-top: 1rem;
+          }
+        }
+  
+        mat-card-actions {
+          justify-content: center;
+        }
+      }
+    }
+  
+    .add-pet-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  
+    .app-title {
+      color: #4B0082;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 2rem;
+  
+      font-family: 'Satisfy', cursive;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 57.62px;
+      letter-spacing: -0.29px;
+      text-align: center;
+      cursor: pointer;
+      color: #1E0E62;
+    }
+  
+    .add-pet-form {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    mat-form-field {
+      margin-bottom: 1rem;
+    }
+  
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+  
+    .forgot-password {
+      color: #FFCF59;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+  
+    .add-pet-button {
+      background-color: #FFCF59;
+      color: #000000;
+      border-radius: 25px;
+      padding: 0.75rem 0;
+      font-weight: bold;
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
+  
+    .add-pet-button:hover {
+      background-color: darken(#FFCF59, 5%);
+    }
+  
+    mat-card-actions {
+      text-align: center;
+      margin-top: 1rem;
+    }
+  
+    .signup-link {
+      color: #FFCF59;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  
+    .signup-link:hover {
+      text-decoration: underline;
+    }
+  
+  
+  .add-pet-button {
+      background-color: #FFCF59 !important;
+      text-transform: initial !important;
+      color: white !important;
+      font-size: 16px;
+      line-height: 22px;
+      border-radius: 10px !important;
+      padding: 0px 12px;
+      font-family:  'DM Sans' !important;
+  }
+  
+  .no-account {
+    color: #7C7C8D !important;
+  }
+  
+  
+  .close-pop {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    svg {
+      width: 20px;
+      height: 20px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
