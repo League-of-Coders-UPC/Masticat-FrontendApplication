@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Masticat
 
-El masticat es un imagen
+El masticat es una herramienta que servirá para poder dispensar comida de una mascota y registrar el peso de esta
