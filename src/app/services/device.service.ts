@@ -11,7 +11,6 @@ export interface Device {
   battery: number;
   food: number;
   water: number;
-  userId: number;
 }
 
 @Injectable({

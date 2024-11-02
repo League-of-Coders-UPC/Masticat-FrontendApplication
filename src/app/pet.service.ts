@@ -4,13 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Pet {
-  id: number;
+  uuid: string;
+  userUuid: string;
   name: string;
-  species: string;
   breed: string;
-  age: number;
+  species: string;
+  birthdate: Date;
   weight: number;
-  imageUrl?: string; // Agregamos esta propiedad como opcional
+  age: number;
+  imageUrl?: string; 
 }
 
 @Injectable({
@@ -21,19 +23,19 @@ export class PetService {
 
   constructor(private http: HttpClient) { }
 
-  getPets(): Observable<Pet[]> {
-    return this.http.get<Pet[]>(this.apiUrl);
+  getPets(userUuid: string): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.apiUrl + "/" + userUuid);
   }
 
   addPet(pet: Pet): Observable<Pet> {
     return this.http.post<Pet>(this.apiUrl, pet);
   }
 
-  updatePet(id: number, pet: Pet): Observable<Pet> {
-    return this.http.put<Pet>(`${this.apiUrl}/${id}`, pet);
+  updatePet(uuid: string, pet: Pet): Observable<Pet> {
+    return this.http.put<Pet>(`${this.apiUrl}/${uuid}`, pet);
   }
 
-  deletePet(id: number): Observable<Pet> {
-    return this.http.delete<Pet>(`${this.apiUrl}/${id}`);
+  deletePet(uuid: string): Observable<Pet> {
+    return this.http.delete<Pet>(`${this.apiUrl}/${uuid}`);
   }
 }

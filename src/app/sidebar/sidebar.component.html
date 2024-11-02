@@ -3,11 +3,11 @@
   <div class="device-list">
     <div
       class="device-item"
-      *ngFor="let device of devices"
+      *ngFor="let device of devices; let i = index"
       (click)="changeDevice.emit(device)"
       [ngClass]="{ 'active': selectedDevice?.uuid === device.uuid }"
     >
-      <p><strong>Device {{ device.uuid }}</strong></p>
+      <p><strong>Device {{ i + 1 }}</strong></p>
       <p>#{{ device.serialNumber }}</p>
     </div>
   </div>

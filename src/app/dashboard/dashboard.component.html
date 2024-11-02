@@ -26,86 +26,110 @@
       </button>
     </mat-toolbar>
 
-    <div class="content">
+    <div class="dashboard-content">
       <div class="stats-container">
-        <mat-card class="stat-card battery">
-          <mat-icon>battery_charging_full</mat-icon>
-          <h2>Batería</h2>
+        <mat-card class="card-global dashboard-card battery">
+          <div class="icon-card">
+            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="19" cy="19" r="19" fill="#77F762" fill-opacity="0.1"/>
+              <path d="M12.4542 20.1788L20.251 9.3831C20.7668 8.66901 21.8934 9.13914 21.7486 10.008L20.6666 16.5H24.8701C25.55 16.5 25.9437 17.2702 25.5457 17.8213L17.7488 28.6169C17.2331 29.331 16.1065 28.8609 16.2513 27.992L17.3333 21.5H13.1297C12.4499 21.5 12.0561 20.7299 12.4542 20.1788Z" fill="#77F762"/>
+            </svg>
+          </div>
+          <h2>Battery</h2>
           <div class="progress-circle">
             <svg viewBox="0 0 36 36" class="circular-chart">
               <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              <path class="circle" stroke-dasharray="44, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="circle" [attr.stroke-dasharray]="selectedDevice?.battery + ', 100'" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
             </svg>
-            <span class="percentage">44%</span>
+            <span class="percentage">{{selectedDevice.battery}}%</span>
           </div>
         </mat-card>
 
-        <mat-card class="stat-card food">
-          <mat-icon>restaurant</mat-icon>
-          <h2>Comida</h2>
+        <mat-card class="card-global dashboard-card food">
+          <div class="icon-card">
+            <svg width="38" height="39" viewBox="0 0 38 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="19" cy="19.5" r="19" fill="#FF7E86" fill-opacity="0.1"/>
+              <path d="M19.4164 27.4215L22.5197 24.3182L21.2237 23.0054L19.6892 24.5399L19.6891 14.6503L21.2236 16.1848L22.5366 14.8719L19.4162 11.7686C19.0581 11.4105 18.4614 11.4105 18.1033 11.7686L15 14.8719L16.313 16.1848L17.8475 14.6503V24.5399L16.313 23.0054L15 24.3183L18.1033 27.4216C18.4784 27.7795 19.0581 27.7795 19.4162 27.4214L19.4164 27.4215Z" fill="#FF7E86"/>
+            </svg>
+          </div>
+          <h2>Food</h2>
+          <div class=" progress-circle">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="circle" [attr.stroke-dasharray]="selectedDevice?.food + ', 100'" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <span class="percentage">{{selectedDevice.food}}%</span>
+          </div>
+        </mat-card>
+
+        <mat-card class="card-global dashboard-card water">
+          <div class="icon-card">
+            <svg width="38" height="39" viewBox="0 0 38 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="19" cy="19.5" r="19" fill="#A162F7" fill-opacity="0.1"/>
+              <path d="M19.3835 11.6191C19.3187 11.5435 19.2243 11.5 19.1248 11.5C19.0254 11.5 18.9309 11.5435 18.8662 11.6191C18.6247 11.9015 13 18.6152 13 21.8272C13.018 23.4349 13.6729 24.9699 14.8212 26.0951C15.9695 27.2204 17.5172 27.8442 19.1249 27.8298C20.7326 27.8442 22.2804 27.2204 23.4287 26.0951C24.577 24.9699 25.2319 23.435 25.2499 21.8272C25.2499 18.6152 19.6252 11.9014 19.3837 11.6191H19.3835ZM21.3196 25.9447C21.2727 25.9701 21.2199 25.983 21.1665 25.982C21.0097 25.9811 20.8738 25.8732 20.8375 25.7207C20.8011 25.5681 20.8738 25.4104 21.0134 25.339C21.669 25.015 22.2216 24.5149 22.6092 23.8947C22.9969 23.2744 23.2042 22.5586 23.2081 21.8273C23.2081 21.6394 23.3604 21.4871 23.5484 21.4871C23.7363 21.4871 23.8886 21.6394 23.8886 21.8273C23.8852 22.6845 23.643 23.5237 23.1892 24.2511C22.7354 24.9783 22.0881 25.5647 21.3196 25.9446L21.3196 25.9447Z" fill="#A162F7"/>
+            </svg>
+          </div>
+            
+          <h2>Water</h2>
           <div class="progress-circle">
             <svg viewBox="0 0 36 36" class="circular-chart">
               <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              <path class="circle" stroke-dasharray="50, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="circle" [attr.stroke-dasharray]="selectedDevice?.water + ', 100'" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
             </svg>
-            <span class="percentage">50%</span>
+            <span class="percentage">{{selectedDevice.water}}%</span>
           </div>
         </mat-card>
 
-        <mat-card class="stat-card water">
-          <mat-icon>opacity</mat-icon>
-          <h2>Agua</h2>
-          <div class="progress-circle">
-            <svg viewBox="0 0 36 36" class="circular-chart">
-              <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              <path class="circle" stroke-dasharray="9, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            </svg>
-            <span class="percentage">9%</span>
-          </div>
-        </mat-card>
-
-        <mat-card class="stat-card add-device" (click)="addDevice()">
+        <mat-card class="card-global dashboard-card stat-card add-device" (click)="invertShowPopupAddDevice()">
           <mat-icon>add</mat-icon>
-          <h2>Agregar Dispositivo</h2>
+          <h2>Add <br> Device</h2>
         </mat-card>
       </div>
 
-      <mat-card class="feeding-habits">
-        <mat-card-header>
-          <mat-card-title>Hábitos de Alimentación</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="chart-container">
-            <app-feeding-habits-chart></app-feeding-habits-chart>
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="live-cam">
-        <mat-card-header>
-          <mat-card-title>Cámara en Vivo</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <img [src]="gifPath" alt="Transmisión de cámara en vivo">
-        </mat-card-content>
-      </mat-card>
-
-        <mat-card class="add-pet" (click)="openAddPetDialog()">
-          <mat-icon>add</mat-icon>
-          <h2>Agregar Mascota</h2>
+      <div class="stats-cam">
+        <mat-card class="card-global dashboard-card  feeding-habits">
+          <mat-card-content>
+            <div class="chart-container">
+              <app-feeding-habits-chart></app-feeding-habits-chart>
+            </div>
+          </mat-card-content>
         </mat-card>
+  
+        <mat-card class="card-global dashboard-card live-cam">
+          <p>Live Cam</p>
 
-        <mat-card class="pet-card" *ngFor="let pet of pets">
+          <mat-card-content>
+            <img [src]="gifPath" alt="Transmisión de cámara en vivo">
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="list-pets">
+        <mat-card class="pet-card card-global dashboard-card" *ngFor="let pet of pets" (click)="selectEditPet(pet)">
           <div class="image-container">
             <div class="pet-species">
+              Edit
             </div>
             <div class="pet-info">
               <h3>{{ pet.name }}</h3>
-              <p>{{ pet.age }} years old</p>
-              <p>{{ pet.weight }} KG</p>
+              <p>{{ pet.age }} years</p>
+              <p>{{ pet.weight }} kg</p>
             </div>
           </div>
         </mat-card>
+        
+        <mat-card class="card-global dashboard-card stat-card add-device" (click)="invertShowPopupAddPet()">
+          <mat-icon>add</mat-icon>
+          <h2>Add <br> Pet</h2>
+        </mat-card>
+      </div>
+
+        
       </div>
     </div>
   </div>
+
+  <app-add-pet *ngIf="showPopupAddPet" (invertShowPopupAddPet)="invertShowPopupAddPet()" (addPet)="addPet($event)"></app-add-pet>
+  <app-edit-pet *ngIf="showPopupEditPet" (invertShowPopupEditPet)="invertShowPopupEditPet()" (editPet)="editPet($event)" [selectedPet]="selectedPet"></app-edit-pet>
+  <app-add-device *ngIf="showPopupAddDevice" (invertShowPopupAddDevice)="invertShowPopupAddDevice()" (addDevice)="addDevice($event)"></app-add-device>
+

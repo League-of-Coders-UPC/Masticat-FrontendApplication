@@ -1,3 +1,4 @@
+import { PetService } from './../pet.service';
 import { AuthStateService } from './../services/auth-state-service.service';
 import { DeviceService } from './../services/device.service';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
@@ -13,6 +14,9 @@ import { CommonModule } from '@angular/common';
 import {NotificationComponent} from "../notification/notification.component";
 import {FeedingHabitsChartComponent} from "./feeding-habits-chart/feeding-habits-chart.component";
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { AddPetComponent } from '../add-pet/add-pet.component';
+import { EditPetComponent } from '../edit-pet/edit-pet.component';
+import { AddDeviceComponent } from '../add-device/add-device.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +29,10 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
     MatMenuModule,
     RouterLink,
     FeedingHabitsChartComponent,
-    SidebarComponent
+    SidebarComponent,
+    AddPetComponent,
+    EditPetComponent,
+    AddDeviceComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
@@ -37,13 +44,19 @@ export class DashboardComponent implements OnInit {
   devices: any[] = [];
   selectedDevice: any = {};
   user: any = null;
+  selectedPet: any = {};
+
+  showPopupAddPet: boolean = false;
+  showPopupEditPet: boolean = false;
+  showPopupAddDevice: boolean = false;
 
   constructor(
     private dialog: MatDialog,
     private authService: AuthService,
     private router: Router,
     private deviceService: DeviceService,
-    private authStateService: AuthStateService
+    private authStateService: AuthStateService,
+    private petService: PetService
   ) { }
 
   ngOnInit(): void {
@@ -51,15 +64,9 @@ export class DashboardComponent implements OnInit {
       this.user = user;
     });
 
-    this.pets = [
-      {
-        name: 'Luna',
-        age: 5,
-        weight: 4.5
-      }
-    ];
     
     this.getDevices();
+    this.getPets();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -97,10 +104,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  addDevice(): void {
-    console.log('Agregar dispositivo');
-  }
-
   getDevices(): void {
     /*
       this.deviceService.getDevices("token").subscribe(
@@ -111,14 +114,59 @@ export class DashboardComponent implements OnInit {
     */
 
     this.devices = [
-      { uuid: '1', petUuid: '1', serialNumber: 'h1h1h1h1h1', status: 'Online', battery: 10, food: 40, water: 90, userId: 1},
-      { uuid: '2', petUuid: '2', serialNumber: 'h2h2h2h2h2', status: 'Online', battery: 10, food: 40, water: 90, userId: 1},
+      { uuid: '1', petUuid: '1', serialNumber: 'h1h1h1h1h1', status: 'Online', battery: 10, food: 40, water: 90},
+      { uuid: '2', petUuid: '2', serialNumber: 'h2h2h2h2h2', status: 'Online', battery: 50, food: 30, water: 40},
     ];
 
     this.selectedDevice = this.devices[0];
   }
+  getPets(): void {
+    /*
+      this.petService.getPets("token").subscribe(
+        (response: any) => {
+          this.pets = response;
+        }
+      );
+    */
 
+      this.pets = [
+        { uuid: '1', userUuid: '1', name: 'Luna', breed: 'Dog', species: 'Mushroom', birthdate: "2020-10-10", weight: 5, age: 3, imageUrl: "1"},
+        { uuid: '2', userUuid: '1', name: 'Clara', breed: 'Cat', species: 'Mushroom', birthdate: "2021-10-15", weight: 4, age: 3, imageUrl: "1"},
+      ];
+  }
   changeDevice(device: any): void {
     this.selectedDevice = device;
+  }
+  invertShowPopupAddPet(): void {
+    this.showPopupAddPet = !this.showPopupAddPet;
+  }
+  addPet(newPet: any): void{
+    this.pets.push(newPet);
+  }
+  
+  editPet(updatedPet: any): void {
+    const index = this.pets.findIndex(pet => pet.uuid === updatedPet.uuid);
+    console.log(updatedPet, index);
+
+    if (index !== -1) {
+      this.pets[index] = updatedPet;
+    }
+  }
+  invertShowPopupEditPet(): void {
+    this.showPopupEditPet = !this.showPopupEditPet;
+    this.selectedPet = {};
+  }
+
+  selectEditPet(pet: any): void {
+    this.selectedPet = pet;
+    this.showPopupEditPet = true;
+  }
+
+  invertShowPopupAddDevice(): void {
+    this.showPopupAddDevice = !this.showPopupAddDevice;
+  }
+
+  addDevice(newDevice: any): void{
+    this.devices.push(newDevice);
   }
 }
