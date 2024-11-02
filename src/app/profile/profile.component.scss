@@ -90,13 +90,18 @@ $text-color-on-primary: rgba(0, 0, 0, 0.87);
   }
 
   .edit-btn {
-    background-color: #ffc107;
+    background-color: #FFCF59;
     color: white;
     font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+    border: none !important;
+    font-family: 'DM Sans';
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 15px;
+    &:hover {
+      cursor: pointer;
+    }
     @media (max-width: 768px) {
       padding: 6px 12px; // Botón más pequeño en móviles
     }
@@ -167,7 +172,7 @@ $text-color-on-primary: rgba(0, 0, 0, 0.87);
     mat-icon {
       margin-right: 10px;
       font-size: 24px;
-      color: #ffc107;
+      color: #FFCF59;
 
       @media (max-width: 768px) {
         font-size: 20px; // Icono más pequeño en móviles
@@ -193,6 +198,37 @@ $text-color-on-primary: rgba(0, 0, 0, 0.87);
       @media (max-width: 768px) {
         font-size: 12px; // Texto más pequeño en móviles
       }
+    }
+  }
+}
+
+
+.custom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #FFCF59;
+  margin-bottom: 30px;
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .form-group {
+    display: flex;
+    width: 100%;
+    .form-field {
+      width: 50%;
+      gap: 40px;
+    }
+    input {
+      width: 90%;
     }
   }
 }
