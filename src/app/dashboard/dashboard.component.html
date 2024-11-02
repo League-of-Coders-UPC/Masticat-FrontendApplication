@@ -1,26 +1,24 @@
 <div class="dashboard-container">
   <!-- Sidebar para la lista de dispositivos -->
-  <div class="sidebar">
-    <span class="title">Masticat</span>
-    <div class="device-list">
-      <div class="device-item" *ngFor="let device of devices">
-        <p>{{ device.name }}</p>
-        <p>{{ device.id }}</p>
-      </div>
-    </div>
-  </div>
-
+  <app-sidebar [devices]="devices" [selectedDevice]="selectedDevice" (changeDevice)="changeDevice($event)"></app-sidebar>
   <!-- Contenido principal del dashboard -->
   <div class="main-content">
     <mat-toolbar color="primary" class="custom-toolbar">
       <span></span>
       <span class="spacer"></span>
       <button mat-menu-item (click)="openNotification()" class="icon-button">
-        <mat-icon>notifications</mat-icon>
+          <div class="notification-active">
+            <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="4.5" cy="4.5" r="3.75" fill="#FF5E6F" stroke="white" stroke-width="1.5"/>
+            </svg>
+        </div>
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5998 13.449V9.62358C17.5981 7.91915 16.9947 6.27033 15.8965 4.9691C14.7984 3.66788 13.2763 2.79823 11.5998 2.51416V1.20295C11.5998 0.883906 11.4734 0.577931 11.2483 0.352335C11.0233 0.126739 10.7181 0 10.3998 0C10.0815 0 9.77632 0.126739 9.55128 0.352335C9.32623 0.577931 9.1998 0.883906 9.1998 1.20295V2.51416C7.52333 2.79823 6.00123 3.66788 4.90307 4.9691C3.8049 6.27033 3.20153 7.91915 3.1998 9.62358V13.449C2.49955 13.6971 1.893 14.1564 1.46333 14.7637C1.03366 15.371 0.801892 16.0967 0.799805 16.8413V19.2472C0.799805 19.5662 0.926233 19.8722 1.15128 20.0978C1.37632 20.3234 1.68154 20.4501 1.9998 20.4501H5.7678C6.04414 21.4694 6.64741 22.3693 7.48452 23.0109C8.32163 23.6524 9.34608 24 10.3998 24C11.4535 24 12.478 23.6524 13.3151 23.0109C14.1522 22.3693 14.7555 21.4694 15.0318 20.4501H18.7998C19.1181 20.4501 19.4233 20.3234 19.6483 20.0978C19.8734 19.8722 19.9998 19.5662 19.9998 19.2472V16.8413C19.9977 16.0967 19.7659 15.371 19.3363 14.7637C18.9066 14.1564 18.3001 13.6971 17.5998 13.449ZM5.5998 9.62358C5.5998 8.34741 6.10552 7.12351 7.00569 6.22113C7.90587 5.31874 9.12676 4.81179 10.3998 4.81179C11.6728 4.81179 12.8937 5.31874 13.7939 6.22113C14.6941 7.12351 15.1998 8.34741 15.1998 9.62358V13.2324H5.5998V9.62358ZM10.3998 21.6531C9.98097 21.6505 9.57009 21.5381 9.208 21.3271C8.84591 21.1161 8.54522 20.8137 8.3358 20.4501H12.4638C12.2544 20.8137 11.9537 21.1161 11.5916 21.3271C11.2295 21.5381 10.8186 21.6505 10.3998 21.6531ZM17.5998 18.0442H3.1998V16.8413C3.1998 16.5222 3.32623 16.2162 3.55128 15.9906C3.77632 15.7651 4.08154 15.6383 4.3998 15.6383H16.3998C16.7181 15.6383 17.0233 15.7651 17.2483 15.9906C17.4734 16.2162 17.5998 16.5222 17.5998 16.8413V18.0442Z" fill="#7C7C8D"/>
+          </svg>
       </button>
 
-      <button mat-icon-button [routerLink]="['/profile']" class="icon-button">
-        <mat-icon>account_circle</mat-icon>
+      <button mat-icon-button [routerLink]="['/profile']" class="icon-button" class="image-profile">
+        <img src="{{user.imageUrl}}" alt="{{user.firstName}} Image" />
       </button>
 
       <button mat-menu-item [routerLink]="['/login']" class="icon-button">

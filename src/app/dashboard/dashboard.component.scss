@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 
 // Definir colores personalizados
-$primary-color: #ffc107; // Color ámbar
+$primary-color: #FFCF59; // Color ámbar
 $primary-color-light: #fff8e1;
 $primary-color-dark: #ffa000;
 $text-color-on-primary: rgba(0, 0, 0, 0.87);
@@ -20,16 +20,23 @@ span {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px;
   background-color: transparent;
   cursor: pointer;
   justify-content: space-between;
+  border: none !important;
+  position: relative;
+  .notification-active {
+    position: absolute;
+    right: 10px;
+    top: 3px;
+    svg {
+      width: 10px;
+    }
+  }
 
-  mat-icon {
-    font-size: 26px;
-    image-orientation: from-image;
-    color: #000;
-    border-radius: 50%;
+  svg {
+    width: 20px;
+    height: 20px;
   }
   &:hover {
     border-color: #FFA500;
@@ -41,9 +48,9 @@ span {
   min-height: 100vh;
 
   .sidebar {
-    width: 180px;
+    width: 250px;
     background-color: $primary-color;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -57,7 +64,8 @@ span {
 
       .device-item {
         background-color: white;
-        padding: 10px;
+        padding: 15px;
+        border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         font-size: 14px;
         color: black;
@@ -66,14 +74,15 @@ span {
           margin: 0;
         }
       }
+      
+    }
+    .title {
+      margin-bottom: 20px;
     }
   }
 
   .main-content {
     flex-grow: 1;
-    background-color: white;
-    padding: 20px;
-
     .custom-toolbar {
       background-color: white;
       color: $text-color-on-primary;
@@ -283,4 +292,17 @@ span {
 }
 
 
-
+.image-profile {
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 10px;
+  background: transparent;
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px !important;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

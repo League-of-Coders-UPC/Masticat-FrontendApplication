@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Device } from '../device.service';
+import { Device } from '../services/device.service';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthStateService } from './../services/auth-state-service.service';
+import { DeviceService } from './../services/device.service';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
 import { Router, RouterLink } from '@angular/router';
@@ -10,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import {NotificationComponent} from "../notification/notification.component";
 import {FeedingHabitsChartComponent} from "./feeding-habits-chart/feeding-habits-chart.component";
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,27 +24,33 @@ import {FeedingHabitsChartComponent} from "./feeding-habits-chart/feeding-habits
     MatToolbarModule,
     MatMenuModule,
     RouterLink,
-    FeedingHabitsChartComponent
+    FeedingHabitsChartComponent,
+    SidebarComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
   gifPath: string = '/assets/catcam.gif';
   pets: any[] = [];
-
-  devices: any[] = [
-    { name: 'Device 1', id: 'h1h1h1h1h1' },
-    { name: 'Device 2', id: 'h2h2h2h2h2' }
-  ];
+  devices: any[] = [];
+  selectedDevice: any = {};
+  user: any = null;
 
   constructor(
     private dialog: MatDialog,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private deviceService: DeviceService,
+    private authStateService: AuthStateService
   ) { }
 
   ngOnInit(): void {
+    this.authStateService.user$.subscribe(user => {
+      this.user = user;
+    });
+
     this.pets = [
       {
         name: 'Luna',
@@ -49,6 +58,16 @@ export class DashboardComponent implements OnInit {
         weight: 4.5
       }
     ];
+    
+    this.getDevices();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['selectedDevice']) {
+      const prevValue = changes['selectedDevice'].previousValue;
+      const currentValue = changes['selectedDevice'].currentValue;
+      console.log('Objeto cambiado:', prevValue, '->', currentValue);
+    }
   }
 
   openNotification(): void {
@@ -80,5 +99,26 @@ export class DashboardComponent implements OnInit {
 
   addDevice(): void {
     console.log('Agregar dispositivo');
+  }
+
+  getDevices(): void {
+    /*
+      this.deviceService.getDevices("token").subscribe(
+        (response: any) => {
+          this.devices = response;
+        }
+      );
+    */
+
+    this.devices = [
+      { uuid: '1', petUuid: '1', serialNumber: 'h1h1h1h1h1', status: 'Online', battery: 10, food: 40, water: 90, userId: 1},
+      { uuid: '2', petUuid: '2', serialNumber: 'h2h2h2h2h2', status: 'Online', battery: 10, food: 40, water: 90, userId: 1},
+    ];
+
+    this.selectedDevice = this.devices[0];
+  }
+
+  changeDevice(device: any): void {
+    this.selectedDevice = device;
   }
 }
