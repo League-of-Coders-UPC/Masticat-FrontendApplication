@@ -232,3 +232,16 @@ $text-color-on-primary: rgba(0, 0, 0, 0.87);
     }
   }
 }
+
+@media (max-width: 768px) {
+  .profile-container {
+    max-width: 90%;
+    .form-group {
+      flex-direction: column;
+      gap: 10px;
+      .form-field {
+        width: 100%;
+      }
+    }
+  }
+}
