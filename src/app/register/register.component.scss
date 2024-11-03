@@ -89,3 +89,11 @@
 .no-account {
   color: #7C7C8D !important;
 }
+
+@media (max-width: 768px) {
+  .container-register {
+    max-width: 90%;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+}
