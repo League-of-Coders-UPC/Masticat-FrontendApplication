@@ -1,4 +1,5 @@
-<div class="sidebar">
+<div class="sidebar"  [ngClass]="{ 'active': showSidebarResponsive }">
+  <p (click)="closeSidebar.emit()" class="close-menu">Close</p>
   <span class="title">Masticat</span>
   <div class="device-list">
     <div

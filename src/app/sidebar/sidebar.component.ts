@@ -12,10 +12,13 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent implements OnInit{
   @Input() devices!: any[];
   @Input() selectedDevice!: any;
+  @Input() showSidebarResponsive!: boolean;
+
   @Output() changeDevice = new EventEmitter<void>();
+  @Output() closeSidebar = new EventEmitter<void>();
 
   ngOnInit() {
-    console.log(this.selectedDevice);
+    console.log(this.showSidebarResponsive);
   }
 
 }

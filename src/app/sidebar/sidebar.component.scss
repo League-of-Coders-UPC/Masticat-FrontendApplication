@@ -55,3 +55,34 @@ span {
       margin-bottom: 20px;
     }
 }
+.close-menu {
+  display: none;
+}
+@media(max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all .4s ease;
+    z-index: 99999;
+    transform: translateX(-300px);
+    &.active {
+      transform: translate(0);
+    }
+  }
+  .close-menu {
+    display: inherit;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 5px 10px;
+    background: white;
+    border-radius: 5px;
+    color: #FFCF59;
+    font-weight: 600;
+    width: fit-content;
+    font-family: 'DM Sans';
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
