@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit {
   showPopupAddPet: boolean = false;
   showPopupEditPet: boolean = false;
   showPopupAddDevice: boolean = false;
+  showSidebarResponsive: boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -136,6 +137,7 @@ export class DashboardComponent implements OnInit {
   }
   changeDevice(device: any): void {
     this.selectedDevice = device;
+    this.showSidebarResponsive = false;
   }
   invertShowPopupAddPet(): void {
     this.showPopupAddPet = !this.showPopupAddPet;
@@ -168,5 +170,13 @@ export class DashboardComponent implements OnInit {
 
   addDevice(newDevice: any): void{
     this.devices.push(newDevice);
+  }
+  
+  openSidebar(): void {
+    this.showSidebarResponsive = true;
+  }
+
+  closeSidebar(): void {
+    this.showSidebarResponsive = false;
   }
 }

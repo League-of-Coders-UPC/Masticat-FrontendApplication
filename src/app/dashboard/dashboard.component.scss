@@ -16,6 +16,7 @@ span {
   cursor: pointer;
   color: #1e0e62;
 }
+
 .icon-button {
   width: 40px;
   height: 40px;
@@ -388,4 +389,75 @@ span {
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr 1fr 1fr;
+}
+.open-menu {
+  display: none;
+}
+@media(max-width: 768px) {
+  .dashboard-container  {
+    overflow: hidden;
+    width: 100%;
+  }
+}
+
+@media(max-width: 1024px) {
+  .dashboard-content  {
+    width: 100%;
+    padding: 25px;
+    max-width: 660px;
+    .stats-cam {
+      flex-direction: column;
+      mat-card {
+          width: 100% !important;
+      }
+    } 
+    .list-pets {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .open-menu {
+    display: inherit;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 5px 10px;
+    background: #FFCF59;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    font-family: 'DM Sans';
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media(max-width: 730px) {
+  .dashboard-content  {
+    width: 100%;
+    padding: 25px;
+    max-width: 450px;
+    .stats-cam {
+      flex-direction: column;
+      mat-card {
+          width: 100% !important;
+      }
+    }  
+  }
+}
+
+@media(max-width: 500px) {
+  .dashboard-content  {
+    width: 100%;
+    padding: 25px;
+    max-width: 300px;
+    .stats-cam {
+      flex-direction: column;
+      mat-card {
+          width: 100% !important;
+      }
+    }  
+    .list-pets {
+      grid-template-columns: 1fr;
+    }
+  }
 }
