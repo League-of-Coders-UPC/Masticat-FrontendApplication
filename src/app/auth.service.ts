@@ -5,6 +5,8 @@ import { tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { StorageService } from './storage.service';
 import { AuthStateService } from './services/auth-state-service.service';
+import { jwtDecode } from "jwt-decode";
+import { Router } from '@angular/router';
 
 interface RegisterResponse {
   token: string;
@@ -22,13 +24,39 @@ export class AuthService {
     private authStateService: AuthStateService // Inyectamos el AuthStateService
   ) { }
 
-  login(email: string, password: string): Observable<any> {
-    return of({ token: 'mock-jwt-token' }).pipe(
-      tap(response => {
-        this.storageService.setItem('token', response.token);
-        // Actualizamos el estado del usuario en el AuthStateService
-        this.authStateService.setUser({ token: "ABC", firstName: "Diego", lastName: "Gonzales", email: "dgon@gmail.com", birthDate: new Date("2000-10-05"), phoneNumber: "999999999", imageUrl: "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/50dab922-5d48-4c6b-8725-7fd0755d9334/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"});
-      })
+  login(username: string, password: string, router: Router): any {
+    const payload = {
+      username,
+      password
+    }
+    this.http.post<any>(this.apiUrl + "/token/", payload).subscribe(
+      (response) => {
+        if (response.access) {
+          this.storageService.setItem('token', response.access);
+          const decoded: any = jwtDecode(response.access);
+
+          this.http.get<any>(this.apiUrl + "/user-details/?user_id=" + decoded.user_id).subscribe(
+            (profileResponse) => {
+              this.authStateService.setUser({
+                token: response.token,
+                firstName: profileResponse[0].first_name,
+                lastName: profileResponse[0].last_name,
+                email: profileResponse[0].user.email,
+                birthDate: profileResponse[0].birth_day,
+                phoneNumber: profileResponse[0].phone_number,
+                imageUrl: profileResponse[0].image_url
+              });
+              router.navigate(["/dashboard"])
+            },
+            (error) => {
+              console.error('Error en la solicitud del perfil:', error);
+            }
+          );
+        }
+      },
+      (error) => {
+        alert(error.error.detail);
+      }
     );
   }
 
@@ -42,10 +70,10 @@ export class AuthService {
       last_name: lastName,
       birth_date: birthDate,
       phone_number: phoneNumber,
-      image_url: 'http://example.com/profile.jpg', 
+      image_url: 'https://photosnow.org/wp-content/uploads/2024/04/no-dp-mood-off_9.jpg', 
     };
 
-    return this.http.post<any>("https://animal-shelter-p65z.onrender.com/api/signup/", payload);
+    return this.http.post<any>(this.apiUrl + "/signup/", payload);
   }
 
   logout(): void {
@@ -58,10 +86,6 @@ export class AuthService {
   }
 
   loginToken(token: string): Observable<any> {
-    return of({ token: 'mock-jwt-token' }).pipe(
-      tap(response => {
-        this.authStateService.setUser({ token: "ABC", firstName: "Diego", lastName: "Gonzales", email: "dgon@gmail.com", birthDate: new Date("2000-10-05"), phoneNumber: "999999999", imageUrl: "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/50dab922-5d48-4c6b-8725-7fd0755d9334/3a3f2d35-8167-4708-9ef0-bdaa980989f9.png"});
-      })
-    );
+    return this.http.get<any>(this.apiUrl + "/user-details/?user_id=" + token);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './auth.service';
 import { CommonModule } from '@angular/common';
+import { jwtDecode } from "jwt-decode";
+import { AuthStateService } from './services/auth-state-service.service';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +16,26 @@ export class AppComponent implements OnInit {
   title = 'Masticat-FrontendApplication';
   isLoading = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private authStateService: AuthStateService) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
+    const token: any = localStorage.getItem('token');
+    console.log(token);
+
     if (token) {
+      const decoded: any = jwtDecode(token);
       this.isLoading = true;
-      this.authService.loginToken(token).subscribe(
-        () => {
+      this.authService.loginToken(decoded.user_id).subscribe(
+        (response) => {
+          this.authStateService.setUser({
+              token: token,
+              firstName: response[0].first_name,
+              lastName: response[0].last_name,
+              email: response[0].user.email,
+              birthDate: response[0].birth_day,
+              phoneNumber: response[0].phone_number,
+              imageUrl: response[0].image_url
+            });
           this.isLoading = false;
         },
         () => {

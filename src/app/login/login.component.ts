@@ -25,19 +25,19 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  @Input() email: string = '';
+  @Input() username: string = '';
   @Input() password: string = '';
-  isErrorForm: { email?: string; password?: string } = {};
+  isErrorForm: { username?: string; password?: string } = {};
 
   constructor(private authService: AuthService, private router: Router) { }
 
   validateForm(): boolean {
     this.isErrorForm = {};
 
-    if (!this.email) {
-      this.isErrorForm.email = 'Email is required.';
-    } else if (!this.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-      this.isErrorForm.email = 'Ingrese un email válido.';
+    if (!this.username) {
+      this.isErrorForm.username = 'Username is required.';
+    } else if (this.username.length < 5) {
+      this.isErrorForm.username = 'Username must be greater than 5 characters.';
     }
 
     if (!this.password) {
@@ -49,15 +49,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.validateForm()) {
-      this.authService.login(this.email, this.password).subscribe(
-        () => {
-          this.router.navigate(['/dashboard']);
-        },
-        error => {
-          console.error('Login failed', error);
-          this.isErrorForm.password = 'Login failed. Verify your email and password.';
-        }
-      );
+      this.authService.login(this.username, this.password, this.router);
     }
   }
 }

@@ -28,7 +28,7 @@
       </button>
     </mat-toolbar>
 
-    <div class="dashboard-content">
+    <div class="dashboard-content" *ngIf="devices.length > 0">
       <div class="stats-container">
         <mat-card class="card-global dashboard-card battery">
           <div class="icon-card">
@@ -133,5 +133,5 @@
 
   <app-add-pet *ngIf="showPopupAddPet" (invertShowPopupAddPet)="invertShowPopupAddPet()" (addPet)="addPet($event)"></app-add-pet>
   <app-edit-pet *ngIf="showPopupEditPet" (invertShowPopupEditPet)="invertShowPopupEditPet()" (editPet)="editPet($event)" [selectedPet]="selectedPet"></app-edit-pet>
-  <app-add-device *ngIf="showPopupAddDevice" (invertShowPopupAddDevice)="invertShowPopupAddDevice()" (addDevice)="addDevice($event)"></app-add-device>
+  <app-add-device *ngIf="showPopupAddDevice == true || devices.length == 0" (invertShowPopupAddDevice)="invertShowPopupAddDevice()" (addDevice)="addDevice($event)"></app-add-device>
 

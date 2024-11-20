@@ -74,7 +74,6 @@ export class DashboardComponent implements OnInit {
     if (changes['selectedDevice']) {
       const prevValue = changes['selectedDevice'].previousValue;
       const currentValue = changes['selectedDevice'].currentValue;
-      console.log('Objeto cambiado:', prevValue, '->', currentValue);
     }
   }
 
@@ -115,8 +114,7 @@ export class DashboardComponent implements OnInit {
     */
 
     this.devices = [
-      { uuid: '1', petUuid: '1', serialNumber: 'h1h1h1h1h1', status: 'Online', battery: 10, food: 40, water: 90},
-      { uuid: '2', petUuid: '2', serialNumber: 'h2h2h2h2h2', status: 'Online', battery: 50, food: 30, water: 40},
+      
     ];
 
     this.selectedDevice = this.devices[0];
@@ -131,8 +129,7 @@ export class DashboardComponent implements OnInit {
     */
 
       this.pets = [
-        { uuid: '1', userUuid: '1', name: 'Luna', breed: 'Dog', species: 'Mushroom', birthdate: "2020-10-10", weight: 5, age: 3, imageUrl: "1"},
-        { uuid: '2', userUuid: '1', name: 'Clara', breed: 'Cat', species: 'Mushroom', birthdate: "2021-10-15", weight: 4, age: 3, imageUrl: "1"},
+        
       ];
   }
   changeDevice(device: any): void {
@@ -165,11 +162,19 @@ export class DashboardComponent implements OnInit {
   }
 
   invertShowPopupAddDevice(): void {
-    this.showPopupAddDevice = !this.showPopupAddDevice;
+    if(this.devices.length !== 0) {
+      this.showPopupAddDevice = !this.showPopupAddDevice;
+    } else {
+      this.showPopupAddDevice = false;
+    }
   }
 
   addDevice(newDevice: any): void{
     this.devices.push(newDevice);
+    if(this.devices.length == 1) {
+      this.selectedDevice = newDevice;
+      this.showPopupAddDevice = true;
+    }
   }
   
   openSidebar(): void {
