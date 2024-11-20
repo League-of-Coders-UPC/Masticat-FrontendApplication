@@ -79,7 +79,7 @@ export class EditUserComponent {
     }
 
     if (!this.user.birthDate) {
-      this.isErrorForm.species = 'Birth Date is required';
+      this.isErrorForm.birthDate = 'Birth Date is required';
     }
 
 

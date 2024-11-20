@@ -32,12 +32,20 @@ export class AuthService {
     );
   }
 
-  register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
-    return of({ success: true }).pipe(
-      tap(() => {
-        //this.authStateService.setUser({ firstName, lastName, email });
-      })
-    );
+  register(firstName: string, lastName: string, username: string, email: string, password: string, phoneNumber: string, birthDate: string): Observable<any> {
+    const payload = {
+      username,
+      email,
+      password,
+      role: 'admin', 
+      first_name: firstName,
+      last_name: lastName,
+      birth_date: birthDate,
+      phone_number: phoneNumber,
+      image_url: 'http://example.com/profile.jpg', 
+    };
+
+    return this.http.post<any>("https://animal-shelter-p65z.onrender.com/api/signup/", payload);
   }
 
   logout(): void {

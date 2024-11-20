@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://masticat.free.beeceptor.com'
+    apiUrl: 'https://animal-shelter-p65z.onrender.com/api'
 };
