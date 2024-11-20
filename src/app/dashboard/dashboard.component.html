@@ -92,7 +92,7 @@
         <mat-card class="card-global dashboard-card  feeding-habits">
           <mat-card-content>
             <div class="chart-container">
-              <app-feeding-habits-chart></app-feeding-habits-chart>
+              <app-feeding-habits-chart *ngIf="habits.length > 0" [habits]="habits"></app-feeding-habits-chart>
             </div>
           </mat-card-content>
         </mat-card>

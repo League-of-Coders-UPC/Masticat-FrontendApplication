@@ -7,7 +7,7 @@
     <mat-card *ngFor="let notification of notifications" class="notification-card card-global two">
       <mat-card-content class="">
         <p>{{ notification.message }}</p>
-        <small>{{ notification.timestamp | date: 'short' }}</small>
+        <small>{{ notification.created_at | date: 'short' }}</small>
       </mat-card-content>
     </mat-card>
   </div>

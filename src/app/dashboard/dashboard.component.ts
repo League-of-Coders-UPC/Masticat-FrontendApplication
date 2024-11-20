@@ -18,6 +18,8 @@ import { AddPetComponent } from '../add-pet/add-pet.component';
 import { EditPetComponent } from '../edit-pet/edit-pet.component';
 import { AddDeviceComponent } from '../add-device/add-device.component';
 import { jwtDecode } from "jwt-decode";
+import { NotificationService } from '../services/notification.service';
+import { HabitstionService } from '../services/habits.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,6 +49,9 @@ export class DashboardComponent implements OnInit {
   user: any = null;
   selectedPet: any = {};
 
+  notifications: any = [];
+  habits: any = [];
+
   showPopupAddPet: boolean = false;
   showPopupEditPet: boolean = false;
   showPopupAddDevice: boolean = false;
@@ -58,7 +63,9 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private deviceService: DeviceService,
     private authStateService: AuthStateService,
-    private petService: PetService
+    private petService: PetService,
+    private notificationService: NotificationService,
+    private habitsService: HabitstionService
   ) { }
 
   ngOnInit(): void {
@@ -68,7 +75,6 @@ export class DashboardComponent implements OnInit {
 
     
     this.getDevices();
-    this.getPets();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -80,7 +86,8 @@ export class DashboardComponent implements OnInit {
 
   openNotification(): void {
     const dialogRef = this.dialog.open(NotificationComponent, {
-      width: '400px'
+      width: '400px',
+      data: { notifications: this.notifications } 
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -103,6 +110,17 @@ export class DashboardComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  getHabits(): void {
+    this.habits = [];
+    if(this.selectedDevice) {
+      this.habitsService.getHabits(this.selectedDevice.uuid).subscribe(
+        (response: any) => {
+          this.habits = response;
+        }
+      );
+    }
   }
 
   getDevices(): void {
@@ -132,10 +150,21 @@ export class DashboardComponent implements OnInit {
           })
         });
         this.selectedDevice = this.devices[0];
-
+        this.getNotifications();
       }
     );
   }
+  getNotifications(): void {
+    const decoded: any = jwtDecode(this.user.token);
+    this.notificationService.getNotifications(decoded.user_id).subscribe(
+      (response: any) => {
+        this.notifications = response;
+        this.getHabits();
+      }
+    );
+  }
+  
+
   getPets(): void {
     /*
       this.petService.getPets("token").subscribe(
@@ -152,6 +181,7 @@ export class DashboardComponent implements OnInit {
   changeDevice(device: any): void {
     this.selectedDevice = device;
     this.showSidebarResponsive = false;
+    this.getHabits();
   }
   invertShowPopupAddPet(): void {
     this.showPopupAddPet = !this.showPopupAddPet;
