@@ -120,7 +120,7 @@
           </div>
         </mat-card>
         
-        <mat-card class="card-global dashboard-card stat-card add-device" (click)="invertShowPopupAddPet()">
+        <mat-card *ngIf="pets.length == 0" class="card-global dashboard-card stat-card add-device" (click)="invertShowPopupAddPet()">
           <mat-icon>add</mat-icon>
           <h2>Add <br> Pet</h2>
         </mat-card>
@@ -131,7 +131,7 @@
     </div>
   </div>
 
-  <app-add-pet *ngIf="showPopupAddPet" (invertShowPopupAddPet)="invertShowPopupAddPet()" (addPet)="addPet($event)"></app-add-pet>
+  <app-add-pet *ngIf="showPopupAddPet" (invertShowPopupAddPet)="invertShowPopupAddPet()" (addPet)="addPet($event)" [selectedDevice]="selectedDevice"></app-add-pet>
   <app-edit-pet *ngIf="showPopupEditPet" (invertShowPopupEditPet)="invertShowPopupEditPet()" (editPet)="editPet($event)" [selectedPet]="selectedPet"></app-edit-pet>
   <app-add-device *ngIf="showPopupAddDevice == true || devices.length == 0" (invertShowPopupAddDevice)="invertShowPopupAddDevice()" (addDevice)="addDevice($event)"></app-add-device>
 

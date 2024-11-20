@@ -4,22 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Pet {
-  uuid: string;
-  userUuid: string;
+  user_id: string;
   name: string;
   breed: string;
   species: string;
-  birthdate: Date;
+  birth_date: string;
   weight: number;
   age: number;
-  imageUrl?: string; 
+  image_url?: string; 
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class PetService {
-  private apiUrl = `${environment.apiUrl}/pets`;
+  private apiUrl = `${environment.apiUrl}/pets/`;
 
   constructor(private http: HttpClient) { }
 

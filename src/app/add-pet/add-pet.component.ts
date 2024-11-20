@@ -10,6 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { MatOption, MatSelect, MatSelectModule, MatSelectTrigger } from '@angular/material/select';
+import { AuthStateService } from '../services/auth-state-service.service';
+import { jwtDecode } from "jwt-decode";
+import { DeviceService } from '../services/device.service';
 
 @Component({
   selector: 'app-add-pet',
@@ -35,6 +38,9 @@ import { MatOption, MatSelect, MatSelectModule, MatSelectTrigger } from '@angula
 export class AddPetComponent {
   @Output() invertShowPopupAddPet = new EventEmitter<void>();
   @Output() addPet = new EventEmitter<any>();
+  @Input() selectedDevice!: any;
+
+  user: any = null;
 
   pet = {
     uuid: "",
@@ -53,7 +59,13 @@ export class AddPetComponent {
 
   isErrorForm: any = {};
 
-  constructor(private authService: AuthService, private router: Router, private PetService: PetService) { }
+  constructor(private authService: AuthService, private router: Router, private PetService: PetService, private authStateService: AuthStateService, private deviceService: DeviceService) { }
+  
+  ngOnInit(): void {
+    this.authStateService.user$.subscribe(user => {
+      this.user = user;
+    });
+  }
 
   validateForm(): boolean {
     this.isErrorForm = {};
@@ -87,18 +99,42 @@ export class AddPetComponent {
 
   onSubmit(): void {
     if(this.validateForm()) {
-      /*
-      this.PetService.addPet(this.pet).subscribe(
-        (response: any) => {
-          
+      const decoded: any = jwtDecode(this.user.token);
+
+      this.PetService.addPet({
+        "user_id": decoded.user_id,
+        "name": this.pet.name,
+        "breed": this.pet.breed,
+        "species": this.pet.species,
+        "birth_date": this.pet.birthdate,
+        "weight": this.pet.weight,
+        "age": this.pet.age,
+        "image_url": this.pet.imageUrl
+      }).subscribe(
+        (responsePet: any) => {
+          this.deviceService.addDevice({
+            "id": "",
+            "pet_id": responsePet.id,
+            "serial_number": this.selectedDevice.serialNumber,
+            "status": this.selectedDevice.status,
+            "food_percentage": this.selectedDevice.food,
+            "water_percentage": this.selectedDevice.water,
+            "battery_percentage": this.selectedDevice.battery
+          }).subscribe(
+            (responseDevice: any) => {
+              console.log(responseDevice);
+              this.addPet.emit(this.pet);
+              this.invertShowPopupAddPet.emit();
+            },
+            (error: any) => {
+    
+            }
+          )
         },
         (error: any) => {
-
-        }
-      );
-    */
-      this.addPet.emit(this.pet);
-      this.invertShowPopupAddPet.emit();
+          alert(error);
+        });
+      
     }
 
   }
