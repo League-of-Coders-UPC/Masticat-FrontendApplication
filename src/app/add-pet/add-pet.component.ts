@@ -112,6 +112,9 @@ export class AddPetComponent {
         "image_url": this.pet.imageUrl
       }).subscribe(
         (responsePet: any) => {
+          this.pet.uuid = responsePet.id;
+          this.pet.userUuid = decoded.user_id;
+
           this.deviceService.addDevice({
             "id": "",
             "pet_id": responsePet.id,
@@ -122,12 +125,11 @@ export class AddPetComponent {
             "battery_percentage": this.selectedDevice.battery
           }).subscribe(
             (responseDevice: any) => {
-              console.log(responseDevice);
-              this.addPet.emit(this.pet);
+              this.addPet.emit(responseDevice);
               this.invertShowPopupAddPet.emit();
             },
             (error: any) => {
-    
+              alert(error)
             }
           )
         },

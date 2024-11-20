@@ -17,6 +17,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { AddPetComponent } from '../add-pet/add-pet.component';
 import { EditPetComponent } from '../edit-pet/edit-pet.component';
 import { AddDeviceComponent } from '../add-device/add-device.component';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-dashboard',
@@ -105,19 +106,35 @@ export class DashboardComponent implements OnInit {
   }
 
   getDevices(): void {
-    /*
-      this.deviceService.getDevices("token").subscribe(
-        (response: any) => {
-          this.devices = response;
-        }
-      );
-    */
+    const decoded: any = jwtDecode(this.user.token);
+    this.deviceService.getDevices(decoded.user_id).subscribe(
+      (response: any) => {
+        //this.devices = response;
+        response.forEach((device: any) => {
+          this.devices.push({
+            uuid: device.id,
+            serialNumber: device.serial_number,
+            status: device.status,
+            pet: {
+              uuid: device.pet.id,
+              name: device.pet.name,
+              userUuid: device.pet.user.id,
+              breed: device.pet.breed,
+              species: device.pet.species,
+              birthdate: device.pet.birth_date,
+              weight: device.pet.weight,
+              age: device.pet.age,
+              imageUrl: device.pet.image_url
+            },
+            battery: device.battery_percentage,
+            food: device.food_percentage,
+            water: device.water_percentage,
+          })
+        });
+        this.selectedDevice = this.devices[0];
 
-    this.devices = [
-      
-    ];
-
-    this.selectedDevice = this.devices[0];
+      }
+    );
   }
   getPets(): void {
     /*
@@ -140,16 +157,32 @@ export class DashboardComponent implements OnInit {
     this.showPopupAddPet = !this.showPopupAddPet;
   }
   addPet(newPet: any): void{
-    this.pets.push(newPet);
+    this.selectedDevice = {
+      uuid: newPet.id,
+      serialNumber: newPet.serial_number,
+      status: newPet.status,
+      pet: {
+        uuid: newPet.pet.id,
+        name: newPet.pet.name,
+        userUuid: newPet.pet.user.id,
+        breed: newPet.pet.breed,
+        species: newPet.pet.species,
+        birthdate: newPet.pet.birth_date,
+        weight: newPet.pet.weight,
+        age: newPet.pet.age,
+        imageUrl: newPet.pet.image_url
+      },
+      battery: newPet.battery_percentage,
+      food: newPet.food_percentage,
+      water: newPet.water_percentage,
+    }
+
+    this.devices[this.devices.length - 1] = this.selectedDevice;
   }
   
   editPet(updatedPet: any): void {
-    const index = this.pets.findIndex(pet => pet.uuid === updatedPet.uuid);
-    console.log(updatedPet, index);
-
-    if (index !== -1) {
-      this.pets[index] = updatedPet;
-    }
+    this.selectedDevice.pet = updatedPet;
+    console.log(updatedPet);
   }
   invertShowPopupEditPet(): void {
     this.showPopupEditPet = !this.showPopupEditPet;

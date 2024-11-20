@@ -38,7 +38,7 @@ export class AuthService {
           this.http.get<any>(this.apiUrl + "/user-details/?user_id=" + decoded.user_id).subscribe(
             (profileResponse) => {
               this.authStateService.setUser({
-                token: response.token,
+                token: response.access,
                 firstName: profileResponse[0].first_name,
                 lastName: profileResponse[0].last_name,
                 email: profileResponse[0].user.email,

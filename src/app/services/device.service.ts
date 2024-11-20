@@ -21,8 +21,8 @@ export class DeviceService {
 
   constructor(private http: HttpClient) { }
 
-  getDevices(token: string): Observable<Device[]> {
-    return this.http.get<Device[]>(this.apiUrl + "/" + token);
+  getDevices(token: string): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "?user_id=" + token);
   }
 
   addDevice(device: Device): Observable<Device> {

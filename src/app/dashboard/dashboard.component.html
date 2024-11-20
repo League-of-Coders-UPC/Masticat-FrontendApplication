@@ -107,20 +107,20 @@
       </div>
 
       <div class="list-pets">
-        <mat-card class="pet-card card-global dashboard-card" *ngFor="let pet of pets" (click)="selectEditPet(pet)">
+        <mat-card *ngIf="selectedDevice.uuid != ''" class="pet-card card-global dashboard-card"  (click)="selectEditPet(selectedDevice.pet)">
           <div class="image-container">
             <div class="pet-species">
               Edit
             </div>
             <div class="pet-info">
-              <h3>{{ pet.name }}</h3>
-              <p>{{ pet.age }} years</p>
-              <p>{{ pet.weight }} kg</p>
+              <h3>{{ selectedDevice.pet.name }}</h3>
+              <p>{{ selectedDevice.pet.age }} years</p>
+              <p>{{ selectedDevice.pet.weight }} kg</p>
             </div>
           </div>
         </mat-card>
         
-        <mat-card *ngIf="pets.length == 0" class="card-global dashboard-card stat-card add-device" (click)="invertShowPopupAddPet()">
+        <mat-card *ngIf="selectedDevice.uuid == ''"  class="card-global dashboard-card stat-card add-device" (click)="invertShowPopupAddPet()">
           <mat-icon>add</mat-icon>
           <h2>Add <br> Pet</h2>
         </mat-card>

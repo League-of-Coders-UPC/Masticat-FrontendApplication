@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { MatOption, MatSelect, MatSelectModule, MatSelectTrigger } from '@angular/material/select';
+import { AuthStateService } from '../services/auth-state-service.service';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-edit-pet',
@@ -37,6 +39,8 @@ export class EditPetComponent {
   @Output() editPet = new EventEmitter<any>();
   @Input() selectedPet: any;
 
+  user: any = null;
+
   pet = {
     uuid: '',
     name: '',
@@ -54,12 +58,16 @@ export class EditPetComponent {
 
   isErrorForm: any = {};
 
-  constructor(private authService: AuthService, private router: Router, private PetService: PetService) { }
+  constructor(private authService: AuthService, private router: Router, private PetService: PetService, private authStateService: AuthStateService) { }
 
   ngOnInit() {
     if (this.selectedPet) {
       this.pet = { ...this.selectedPet }; 
     }
+
+    this.authStateService.user$.subscribe(user => {
+      this.user = user;
+    });
   }
   validateForm(): boolean {
     this.isErrorForm = {};
@@ -93,19 +101,26 @@ export class EditPetComponent {
 
   onSubmit(): void {
     if(this.validateForm()) {
-      /*
-        this.PetService.updatePet(this.pet.uuid, this.pet).subscribe(
-          (response: any) => {
-            
-          },
-          (error: any) => {
+      const decoded: any = jwtDecode(this.user.token);
 
-          }
-        );
-      */
-      this.editPet.emit(this.pet);
-      this.invertShowPopupEditPet.emit();
-
+      this.PetService.updatePet(this.pet.uuid, {
+        "user_id": decoded.user_id,
+        "name": this.pet.name,
+        "breed": this.pet.breed,
+        "species": this.pet.species,
+        "birth_date": this.pet.birthdate,
+        "weight": this.pet.weight,
+        "age": this.pet.age,
+        "image_url": this.pet.imageUrl
+      }).subscribe(
+        (response: any) => {
+          this.editPet.emit(this.pet);
+          this.invertShowPopupEditPet.emit();
+        },
+        (error: any) => {
+          alert(error)
+        }
+      );
     }
 
   }
