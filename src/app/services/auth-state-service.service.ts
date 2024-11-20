@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 interface User { 
+  id: string;
   token: string; 
   firstName: string; 
   lastName: string; 

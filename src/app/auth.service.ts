@@ -38,11 +38,12 @@ export class AuthService {
           this.http.get<any>(this.apiUrl + "/user-details/?user_id=" + decoded.user_id).subscribe(
             (profileResponse) => {
               this.authStateService.setUser({
+                id: profileResponse[0].id,
                 token: response.access,
                 firstName: profileResponse[0].first_name,
                 lastName: profileResponse[0].last_name,
                 email: profileResponse[0].user.email,
-                birthDate: profileResponse[0].birth_day,
+                birthDate: profileResponse[0].birth_date,
                 phoneNumber: profileResponse[0].phone_number,
                 imageUrl: profileResponse[0].image_url
               });

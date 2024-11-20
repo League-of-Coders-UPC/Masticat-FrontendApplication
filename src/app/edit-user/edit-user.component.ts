@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { MatOption, MatSelect, MatSelectModule, MatSelectTrigger } from '@angular/material/select';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -39,10 +40,10 @@ export class EditUserComponent {
   @Input() selectedUser: any;
 
   user = {
+    id: '',
     token: '',
     firstName: '',
     lastName: '',
-    email: '',
     birthDate: '',
     phoneNumber: "",
     imageUrl: "",
@@ -53,7 +54,7 @@ export class EditUserComponent {
 
   isErrorForm: any = {};
 
-  constructor(private authService: AuthService, private router: Router, private PetService: PetService) { }
+  constructor(private authService: AuthService, private router: Router, private PetService: PetService, private userService: UserService) { }
 
   ngOnInit() {
     if (this.selectedUser) {
@@ -70,12 +71,6 @@ export class EditUserComponent {
 
     if (!this.user.lastName) {
       this.isErrorForm.breed = 'Last Name is required.';
-    }
-
-    if (!this.user.email) {
-      this.isErrorForm.email = 'Email is required.';
-    } else if (!this.user.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-      this.isErrorForm.email = 'Email is not valid.';
     }
 
     if (!this.user.birthDate) {
@@ -115,7 +110,9 @@ export class EditUserComponent {
           }
         );
       */
-      this.updatedUser.emit(this.user);
+        this.updatedUser.emit(this.user);
+
+      
     }
   }
 

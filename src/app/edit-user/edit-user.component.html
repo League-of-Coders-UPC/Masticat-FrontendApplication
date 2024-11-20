@@ -22,12 +22,6 @@
               <div *ngIf="isErrorForm.lastName" class="error-message">{{ isErrorForm.lastName }}</div>
 
               <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput type="text" [(ngModel)]="user.email" name="email" required>
-              </mat-form-field>
-              <div *ngIf="isErrorForm.email" class="error-message">{{ isErrorForm.email }}</div>
-
-              <mat-form-field appearance="outline">
                 <mat-label>Birthdate</mat-label>
                 <input matInput type="date" [(ngModel)]="user.birthDate" name="birthDate" required>
               </mat-form-field>

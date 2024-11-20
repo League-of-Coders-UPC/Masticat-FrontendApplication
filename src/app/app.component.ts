@@ -28,11 +28,12 @@ export class AppComponent implements OnInit {
       this.authService.loginToken(decoded.user_id).subscribe(
         (response) => {
           this.authStateService.setUser({
+              id: response[0].id,
               token: token,
               firstName: response[0].first_name,
               lastName: response[0].last_name,
               email: response[0].user.email,
-              birthDate: response[0].birth_day,
+              birthDate: response[0].birth_date,
               phoneNumber: response[0].phone_number,
               imageUrl: response[0].image_url
             });

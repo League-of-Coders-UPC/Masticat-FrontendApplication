@@ -7,6 +7,8 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {Router} from "@angular/router";
 import { AuthStateService } from '../services/auth-state-service.service';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { UserService } from '../services/user.service';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-profile',
@@ -29,12 +31,14 @@ import { EditUserComponent } from '../edit-user/edit-user.component';
 export class ProfileComponent {
   user: any = null;
   showPopupEditUser: boolean = false;
-  constructor(private router: Router, private authStateService: AuthStateService) {}
+  constructor(private router: Router, private authStateService: AuthStateService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.authStateService.user$.subscribe(user => {
       this.user = user;
+      this.user.birthDate = new Date(this.user.birthDate);
     });
+    console.log(this.user);
   }
 
   goToDashboard() {
@@ -46,7 +50,7 @@ export class ProfileComponent {
     const month = ("0" + (date.getMonth() + 1)).slice(-2);  // Obtiene el mes (agrega +1 porque los meses empiezan en 0)
     const year = date.getFullYear();
 
-    return  `${day}-${month}-${year}`;
+    return  `${year}-${month}-${day}`;
   };
 
   invertShowPopupModifyUser(): void {
@@ -57,13 +61,35 @@ export class ProfileComponent {
   updatedUser(userEdit: any): void {
     let userEditCopy = userEdit;
     userEditCopy.birthDate = new Date(userEditCopy.birthDate);
+    const decoded: any = jwtDecode(userEditCopy.token);
 
-    this.authStateService.setUser(userEditCopy);
-    this.authStateService.user$.subscribe(user => {
-      this.user = user;
-    });
+    this.userService.updateUser(userEdit.id, {
+      "user_id": decoded.user_id,
+      "first_name": userEdit.firstName,
+      "last_name": userEdit.lastName,
+      "birth_date": this.getFormatDate(userEdit.birthDate),
+      "phone_number": userEdit.phoneNumber,
+      "image_url": userEdit.imageUrl,
+    }).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.authStateService.setUser({
+          id: userEditCopy.id,
+          token: userEditCopy.token,
+          firstName: userEditCopy.firstName,
+          lastName: userEditCopy.lastName,
+          email: userEditCopy.email,
+          birthDate: userEdit.birthDate,
+          phoneNumber: userEditCopy.phoneNumber,
+          imageUrl: userEditCopy.imageUrl
+        });
+        this.invertShowPopupModifyUser();
+      },
+      (error: any) => {
 
-    this.invertShowPopupModifyUser();
+      }
+    );
   }
-
+  
 }
+
