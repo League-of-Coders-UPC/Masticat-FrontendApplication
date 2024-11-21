@@ -3,12 +3,15 @@
     <span>Notificaciones</span>
   </mat-toolbar>
 
-  <div class="notifications-list">
+  <div class="notifications-list" *ngIf="notifications.length > 0">
     <mat-card *ngFor="let notification of notifications" class="notification-card card-global two">
       <mat-card-content class="">
         <p>{{ notification.message }}</p>
         <small>{{ notification.created_at | date: 'short' }}</small>
       </mat-card-content>
     </mat-card>
+  </div>
+  <div *ngIf="notifications.length == 0">
+    <p style="color: white;">No hay notificaciones</p>
   </div>
 </div>

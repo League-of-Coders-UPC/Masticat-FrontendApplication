@@ -12,8 +12,9 @@ export class NotificationService {
   constructor(private http: HttpClient) { }
 
   getNotifications(id: string): Observable<any> {
+
+    return this.http.get<any>(this.apiUrl + "/?user_id=" + id);
     return this.http.get<any>(this.apiUrl + "/");
 
-    return this.http.get<any>(this.apiUrl + "/?device_id=" + id + "/");
   }
 }

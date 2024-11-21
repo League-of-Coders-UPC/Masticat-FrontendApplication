@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
   selectedDevice: any = {};
   user: any = null;
   selectedPet: any = {};
+  isLoading = true;
 
   notifications: any = [];
   habits: any = [];
@@ -118,6 +119,7 @@ export class DashboardComponent implements OnInit {
       this.habitsService.getHabits(this.selectedDevice.uuid).subscribe(
         (response: any) => {
           this.habits = response;
+          this.isLoading = false;
         }
       );
     }

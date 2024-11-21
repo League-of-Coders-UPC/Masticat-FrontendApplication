@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import {DatePipe, NgForOf} from "@angular/common";
+import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatToolbar} from "@angular/material/toolbar";
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,7 +13,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     MatCardContent,
     MatCard,
     MatToolbar,
-    NgForOf
+    NgForOf,
+    CommonModule
   ],
   styleUrls: ['./notification.component.scss']
 })

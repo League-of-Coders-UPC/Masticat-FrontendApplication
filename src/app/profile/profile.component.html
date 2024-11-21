@@ -14,7 +14,7 @@
     <img src="{{user.imageUrl}}" alt="User photo" class="profile-photo">
     <div class="profile-info">
       <!-- Texto por defecto para el nombre y el email -->
-      <h1>{{user.firstName + user.lastName}}</h1>
+      <h1>{{user.firstName + " " + user.lastName}}</h1>
       <p>{{user.email}}</p>
     </div>
     <button mat-raised-button color="primary" class="edit-btn" (click)="invertShowPopupModifyUser()">Edit</button>

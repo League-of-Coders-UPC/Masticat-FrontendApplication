@@ -12,8 +12,6 @@ export class HabitstionService {
   constructor(private http: HttpClient) { }
 
   getHabits(id: string): Observable<any> {
-    return this.http.get<any>(this.apiUrl + "/");
-
-    return this.http.get<any>(this.apiUrl + "/?user_id=" + id + "/");
+    return this.http.get<any>(this.apiUrl + "/?user_id=" + id);
   }
 }
