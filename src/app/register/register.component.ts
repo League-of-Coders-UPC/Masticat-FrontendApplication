@@ -37,6 +37,7 @@ export class RegisterComponent {
   @Input() username: string = '';
   @Input() phoneNumber: string = '';
   @Input() birthDate: string = '';
+  isLoading: boolean = false;
 
 
   isErrorForm: { email?: string; password?: string; confirmPassword?: string; FirstName?: string; LastName?: string; Username?: string; phoneNumber?: string; birthDate?: string} = {};
@@ -90,17 +91,22 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    console.log(this.birthDate);
+   
 
     if (this.validateForm()) {
+      if(this.isLoading) {
+        return;
+      }
+      this.isLoading = true;
+      
       this.authService.register(this.FirstName, this.LastName, this.username, this.email, this.password, this.phoneNumber, this.birthDate).subscribe(
         () => {
           alert("You have successfully registered.")
           this.router.navigate(['/login']);
         },
         (error) => {
+          this.isLoading = false;
           alert('Registration failed, please try again.');
-          console.error('Error during registration:', error);
         }
       );
     }

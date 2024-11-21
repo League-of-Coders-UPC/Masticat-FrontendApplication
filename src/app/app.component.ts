@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
               imageUrl: response[0].image_url
             });
           this.isLoading = false;
+          
         },
         () => {
           this.isLoading = false;

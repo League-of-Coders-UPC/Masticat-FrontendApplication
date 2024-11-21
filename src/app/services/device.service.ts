@@ -25,8 +25,8 @@ export class DeviceService {
     return this.http.get<any>(this.apiUrl + "?user_id=" + token);
   }
 
-  addDevice(device: Device): Observable<Device> {
-    return this.http.post<Device>(this.apiUrl, device);
+  addDevice(device: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, device);
   }
 
   updateDevice(uuid: number, device: Device): Observable<Device> {

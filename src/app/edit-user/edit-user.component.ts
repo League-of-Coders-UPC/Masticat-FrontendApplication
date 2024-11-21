@@ -38,6 +38,7 @@ export class EditUserComponent {
   @Output() updatedUser = new EventEmitter<any>();
 
   @Input() selectedUser: any;
+  isLoading: boolean = false;
 
   user = {
     id: '',
@@ -100,6 +101,10 @@ export class EditUserComponent {
 
   onSubmit(): void {
     if(this.validateForm()) {
+      if(this.isLoading) {
+        return;
+      }
+      this.isLoading = true;
       /*
         this.PetService.updatePet(this.pet.uuid, this.pet).subscribe(
           (response: any) => {

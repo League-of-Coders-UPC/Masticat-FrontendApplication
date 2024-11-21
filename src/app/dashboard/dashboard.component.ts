@@ -110,6 +110,8 @@ export class DashboardComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+    localStorage.removeItem('token');
+    this.authStateService.clearUser();
     this.router.navigate(['/login']);
   }
 
@@ -122,6 +124,8 @@ export class DashboardComponent implements OnInit {
           this.isLoading = false;
         }
       );
+    } else {
+      this.isLoading = false;
     }
   }
 
@@ -146,9 +150,9 @@ export class DashboardComponent implements OnInit {
               age: device.pet.age,
               imageUrl: device.pet.image_url
             },
-            battery: device.battery_percentage,
-            food: device.food_percentage,
-            water: device.water_percentage,
+            battery: device.battery_quantity,
+            food: device.food_quantity / device.food_limit * 100,
+            water: device.water_quantity / device.water_limit * 100,
           })
         });
         this.selectedDevice = this.devices[0];
@@ -183,7 +187,9 @@ export class DashboardComponent implements OnInit {
   changeDevice(device: any): void {
     this.selectedDevice = device;
     this.showSidebarResponsive = false;
-    this.getHabits();
+    if(this.selectedDevice.uuid != "") {
+      this.getHabits();
+    }
   }
   invertShowPopupAddPet(): void {
     this.showPopupAddPet = !this.showPopupAddPet;
@@ -204,9 +210,9 @@ export class DashboardComponent implements OnInit {
         age: newPet.pet.age,
         imageUrl: newPet.pet.image_url
       },
-      battery: newPet.battery_percentage,
-      food: newPet.food_percentage,
-      water: newPet.water_percentage,
+      battery: newPet.battery_quantity,
+      food: newPet.food_quantity / newPet.food_limit * 100,
+      water: newPet.water_quantity / newPet.water_limit * 100,
     }
 
     this.devices[this.devices.length - 1] = this.selectedDevice;

@@ -38,6 +38,7 @@ export class EditPetComponent {
   @Output() invertShowPopupEditPet = new EventEmitter<void>();
   @Output() editPet = new EventEmitter<any>();
   @Input() selectedPet: any;
+  isLoading: boolean = false;
 
   user: any = null;
 
@@ -101,6 +102,10 @@ export class EditPetComponent {
 
   onSubmit(): void {
     if(this.validateForm()) {
+      if(this.isLoading) {
+        return;
+      }
+      this.isLoading = true;
       const decoded: any = jwtDecode(this.user.token);
 
       this.PetService.updatePet(this.pet.uuid, {
@@ -118,6 +123,7 @@ export class EditPetComponent {
           this.invertShowPopupEditPet.emit();
         },
         (error: any) => {
+          this.isLoading = false;
           alert(error)
         }
       );

@@ -39,6 +39,7 @@ export class AddPetComponent {
   @Output() invertShowPopupAddPet = new EventEmitter<void>();
   @Output() addPet = new EventEmitter<any>();
   @Input() selectedDevice!: any;
+  isLoading: boolean = false;
 
   user: any = null;
 
@@ -99,6 +100,11 @@ export class AddPetComponent {
 
   onSubmit(): void {
     if(this.validateForm()) {
+      if(this.isLoading) {
+        return;
+      }
+      this.isLoading = true;
+
       const decoded: any = jwtDecode(this.user.token);
 
       this.PetService.addPet({
@@ -120,20 +126,26 @@ export class AddPetComponent {
             "pet_id": responsePet.id,
             "serial_number": this.selectedDevice.serialNumber,
             "status": this.selectedDevice.status,
-            "food_percentage": this.selectedDevice.food,
-            "water_percentage": this.selectedDevice.water,
-            "battery_percentage": this.selectedDevice.battery
+            "food_quantity": this.selectedDevice.food,
+            "water_quantity": this.selectedDevice.water,
+            "battery_quantity": this.selectedDevice.battery,
+            "food_limit": 500,
+            "water_limit": 1000
           }).subscribe(
             (responseDevice: any) => {
               this.addPet.emit(responseDevice);
               this.invertShowPopupAddPet.emit();
+              this.isLoading = false;
+
             },
             (error: any) => {
+              this.isLoading = false;
               alert(error)
             }
           )
         },
         (error: any) => {
+          this.isLoading = false;
           alert(error);
         });
       
