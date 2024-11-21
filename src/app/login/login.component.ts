@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
+          this.isLoading = false;
           alert(error.error.detail);
         }
       );
